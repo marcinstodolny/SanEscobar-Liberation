@@ -1,8 +1,8 @@
 import random
-def create_board(width, height):
+def create_board(width, height, BOARD_BORDER):
     return [
         [
-            "#"
+            BOARD_BORDER
             if check_border(height, j)
             or check_border(width, i)
             else " "
