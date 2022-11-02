@@ -33,6 +33,7 @@ def create_player():
                 "Dmg": 5,
                 "Armor": 5}
 
+
     elf = {'name': "elf",
            'weapon': "sword",
            'age': 442,
@@ -73,24 +74,22 @@ def live_level(player):
     if player['live'] > 20:
         print("still  alive")
 
-
-def player_movement(board, player, key):
-    if key == 's' and board[player["x"]+1][player['y']] != BOARD_BORDER:
-        player["x"] += 1
-    if key == 'w' and board[player["x"]-1][player['y']] != BOARD_BORDER:
-        player["x"] -= 1
-    if key == 'a' and board[player["x"]][player['y'] - 1] != BOARD_BORDER:
-        player["y"] -= 1
-    if key == 'd' and board[player["x"]][player['y'] + 1] != BOARD_BORDER:
-        player["y"] += 1
+    for x in players:
+        counter += 1
+        x = x.get('name')
+        print(f'{counter}-{x}')
+    x = input("Choose player by entering the number: ")
+    print(players[int(x)]['name'])
+    return players[int(x)]
 
 
 def main():
     player = create_player()
-    live_level(player)
     board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT, BOARD_BORDER)
-    engine.put_items_on_board(board, player)
-    # util.clear_screen()
+    engine.put_items_on_board(board, player, BOARD_BORDER)
+    board[BOARD_HEIGHT-2][BOARD_WIDTH-1] = "]"
+    collected_items = {}
+    util.clear_screen()
     is_running = True
     while is_running:
         engine.put_player_on_board(board, player)
@@ -99,8 +98,10 @@ def main():
         key = util.key_pressed()
         if key == 'q':
             is_running = False
+        if key == 'i':
+            ui.display_items(collected_items)
         else:
-            player_movement(board, player, key)
+            engine.player_movement(board, player, key, collected_items, BOARD_BORDER)
         # util.clear_screen()
 
 
