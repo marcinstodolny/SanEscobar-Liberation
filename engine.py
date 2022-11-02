@@ -1,7 +1,9 @@
 import random
-
 ITEMS_ICON = ["+", "&", "$", "="]
 ITEMS_MEANING = {"+": "Sword", "&": "Wand", "$": "Shield", "=": "Axe"}
+DMG_ITEMS = {"Sword": 2, "Wand": 3,"Axe": 1}
+ARMOR_ITEMS = {"Shield": 1}
+HEALTH_ITEMS = {}
 
 def create_board(width, height, BOARD_BORDER):
     return [
@@ -59,7 +61,15 @@ def change_board(player):
 def item_check(board, player, collected_items):
     location = board[player["x"]][player['y']]
     if location in ITEMS_ICON:
-        if ITEMS_MEANING[location] in collected_items:
-            collected_items[ITEMS_MEANING[location]] += 1
+        item = ITEMS_MEANING[location]
+        if item in collected_items:
+            collected_items[item] += 1
         else:
-            collected_items[ITEMS_MEANING[location]] = 1
+            collected_items[item] = 1
+        equipment_to_stats(item, player)
+        
+def equipment_to_stats(item, player):
+    if item in list(DMG_ITEMS.keys())[:3]:
+        player["dmg"] += DMG_ITEMS[item]
+    elif item in list(ARMOR_ITEMS.keys()):
+        player["armor"] += ARMOR_ITEMS[item]
