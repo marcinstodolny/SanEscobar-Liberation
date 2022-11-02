@@ -61,6 +61,13 @@ def create_player():
         return players[int(x)]
 
 
+def live_level(player):
+    if player['live'] < 20:
+        print("you die!!!!!!!!!!!!!!!!")
+    if player['live'] > 20:
+        print("still  alive")
+
+
 def player_movement(board, player, key):
     if key == 's' and board[player["x"]+1][player['y']] != BOARD_BORDER:
         player["x"] += 1
@@ -74,6 +81,7 @@ def player_movement(board, player, key):
 
 def main():
     player = create_player()
+    live_level(player)
     board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT, BOARD_BORDER)
     engine.put_items_on_board(board, player)
     # util.clear_screen()
@@ -91,5 +99,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    create_player()
+    main()
