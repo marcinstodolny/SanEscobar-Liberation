@@ -13,9 +13,9 @@ def key_pressed():
             import msvcrt
         except ImportError:
             # FIXME what to do on other platforms?
-            raise ImportError('getch not available')
+            raise ImportError("getch not available")
         else:
-            return msvcrt.getch().decode('utf-8')
+            return msvcrt.getch().decode("utf-8")
     else:
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
@@ -29,6 +29,6 @@ def key_pressed():
 
 def clear_screen():
     if os.name == "nt":
-        os.system('cls')
+        os.system("cls")
     else:
-        os.system('clear')
+        os.system("clear")

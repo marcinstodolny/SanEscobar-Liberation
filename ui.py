@@ -4,7 +4,7 @@ def display_board(board):
 
 
 def display_items(items_list):
-    for key,value in items_list.items():
+    for key, value in items_list.items():
         print(f"{key} : {value}")
 
 
