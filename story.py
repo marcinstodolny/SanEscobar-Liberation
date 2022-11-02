@@ -179,7 +179,7 @@ BOSS_art = r"""
  \_____/
 """
 
-#    : 
+#gfdsgfdsgfds 
 x,y = 1,1
 board[x][y+1] = "/"
 board[x][y+2] = "\"
