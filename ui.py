@@ -6,3 +6,7 @@ def display_board(board):
     Nothing
     '''
     pass
+
+def display_items(items_list):
+    for key,value in items_list.items():
+        print(f"{key} : {value}")
