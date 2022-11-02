@@ -19,7 +19,9 @@ def create_player():
               'x': PLAYER_START_X,
               "y": PLAYER_START_Y,
               "icon": PLAYER_ICON,
-              "live": 100}
+              "live": 100,
+              "Dmg": 5,
+              "Armor": 5}
 
     krasnal = {'name': "Krasnal",
                'weapon': "Axe",
@@ -27,7 +29,9 @@ def create_player():
                'x': PLAYER_START_X,
                "y": PLAYER_START_Y,
                "icon": PLAYER_ICON,
-               "live": 100}
+               "live": 100,
+                "Dmg": 5,
+                "Armor": 5}
 
     elf = {'name': "elf",
            'weapon': "sword",
@@ -35,7 +39,9 @@ def create_player():
            'x': PLAYER_START_X,
            "y": PLAYER_START_Y,
            "icon": PLAYER_ICON,
-           "live": 200}
+           "live": 200,
+            "Dmg": 5,
+            "Armor": 5}
 
     choice = input("Do you want to create player[1] or choose player[2]")
     if int(choice) == 1:
