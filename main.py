@@ -28,6 +28,28 @@ def create_player():
 
     return player
 
+def find_player(board, PLAYER_ICON):
+    for sub_list in board:
+        if PLAYER_ICON in sub_list:
+            return (board.index(sub_list), sub_list.index(PLAYER_ICON))
+
+
+def player_movement(board, PLAYER_ICON):
+    key = util.key_pressed()
+    x,y = find_player(board, '@')
+    if key == 's':
+        board[x][y] = " "
+        board[x+1][y] = PLAYER_ICON
+    if key == 'w':
+        board[x][y] = " "
+        board[x-1][y] = PLAYER_ICON
+    if key == 'a':
+        board[x][y] = " "
+        board[x][y-1] = PLAYER_ICON
+    if key == 'd':
+        board[x][y] = " "
+        board[x][y+1] = PLAYER_ICON
+
 
 def main():
     player = create_player()
