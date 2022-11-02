@@ -19,7 +19,7 @@ def create_player():  # sourcery skip: inline-immediately-returned-variable
               "icon": PLAYER_ICON}
 
     # for x in player:
-    #     player[x] = input(f"Enter player's {x}: ")
+    #    player[x] = input(f"Enter player's {x}: ")
 
     return player
 
@@ -35,6 +35,7 @@ def player_movement(board, player, key):
         player["y"] += 1
 
         
+
 def main():
     player = create_player()
     board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
