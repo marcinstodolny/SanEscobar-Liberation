@@ -13,8 +13,7 @@ def key_pressed():
             # FIXME what to do on other platforms?
             raise ImportError('getch not available')
         else:
-            key = msvcrt.getch().decode('utf-8')
-            return key
+            return msvcrt.getch().decode('utf-8')
     else:
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)

@@ -1,11 +1,7 @@
 def display_board(board):
-    '''
-    Displays complete game board on the screen
+    for item in board:
+        print("".join(item))
 
-    Returns:
-    Nothing
-    '''
-    pass
 
 def display_items(items_list):
     for key,value in items_list.items():
