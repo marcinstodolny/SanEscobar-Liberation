@@ -13,7 +13,7 @@ BOARD_BORDER = "#"
 
 def create_player():
 
-    player = {'name': "Maciej",
+    player = {'name': "Maciej1",
               'weapon': "d",
               'age': 1,
               'x': PLAYER_START_X,
