@@ -1,6 +1,5 @@
 import random
 
-ITEMS_ICON = ["+", "&", "$", "="]
 ITEMS_MEANING = {"+": "Sword", "&": "Wand", "$": "Shield", "=": "Axe"}
 DMG_ITEMS = {"Sword": 2, "Wand": 3, "Axe": 1}
 ARMOR_ITEMS = {"Shield": 1}
@@ -31,10 +30,11 @@ def put_player_on_board(board, player):
 
 def put_items_on_board(board, player, BOARD_BORDER):
     item_number = random.randint(5, 10)
+    items_icon = list(ITEMS_MEANING.keys())
     for _ in range(item_number):
         x, y = random.randint(1, len(board) - 1), random.randint(1, len(board[0]) - 1)
-        if board[x][y] not in [player["icon"], BOARD_BORDER] + ITEMS_ICON:
-            board[x][y] = random.choice(ITEMS_ICON)
+        if board[x][y] not in [player["icon"], BOARD_BORDER] + items_icon:
+            board[x][y] = random.choice(items_icon)
         else:
             item_number += 1
 
@@ -60,7 +60,7 @@ def change_board(player):
 
 def item_check(board, player, collected_items):
     location = board[player["x"]][player["y"]]
-    if location in ITEMS_ICON:
+    if location in list(ITEMS_MEANING.keys()):
         item = ITEMS_MEANING[location]
         if item in collected_items:
             collected_items[item] += 1
@@ -70,7 +70,7 @@ def item_check(board, player, collected_items):
 
 
 def equipment_to_stats(item, player):
-    if item in list(DMG_ITEMS.keys())[:3]:
+    if item in list(DMG_ITEMS.keys()):
         player["dmg"] += DMG_ITEMS[item]
     elif item in list(ARMOR_ITEMS.keys()):
         player["armor"] += ARMOR_ITEMS[item]
