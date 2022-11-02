@@ -1,26 +1,38 @@
+import random
 def create_board(width, height):
-    '''
-    Creates a new game board based on input parameters.
-
-    Args:
-    int: The width of the board
-    int: The height of the board
-
-    Returns:
-    list: Game board
-    '''
-    pass
+    return [
+        [
+            "#"
+            if check_border(height, j)
+            or check_border(width, i)
+            else " "
+            for i in range(width)
+        ]
+        for j in range(height)
+    ]
+    
+def check_border(direction, iterator):
+    return iterator in [0] + [
+        direction - k for k in [0,1]
+    ]
 
 
 def put_player_on_board(board, player):
-    '''
-    Modifies the game board by placing the player icon at its coordinates.
+    print(player["x"], player["y"])
+    for sub_list in board:
+        if player["icon"] in sub_list:
+            board[board.index(sub_list)][sub_list.index(player["icon"])] = " "
+    board[player["x"]][player["y"]] = player["icon"]
 
-    Args:
-    list: The game board
-    dictionary: The player information containing the icon and coordinates
 
-    Returns:
-    Nothing
-    '''
-    pass
+def put_items_on_board(board, player):
+    items_icon = ["+", "&", "$", "="]
+    item_number = random.randint(5,10)
+    for _ in range(item_number):
+        x, y = random.randint(1,len(board)-1), random.randint(1,len(board[0])-1)
+        if board[x][y] not in [player["icon"], "#"] + items_icon:
+            board[x][y] = random.choice(items_icon)
+        else:
+            item_number += 1
+            
+            
