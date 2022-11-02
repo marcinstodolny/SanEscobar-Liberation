@@ -1,6 +1,9 @@
 import util
 import engine
 import ui
+import util
+from util import *
+from ui import *
 
 PLAYER_ICON = '@'
 PLAYER_START_X = 3
@@ -14,32 +17,39 @@ BOARD_BORDER = "#"
 def create_player():
 
     player = {'name': "Maciej",
+              "live": 100,
               'weapon': "sword",
               'age': 99,
               'x': PLAYER_START_X,
               "y": PLAYER_START_Y,
               "icon": PLAYER_ICON,
-              "live": 100}
+
+              "Dmg": 5,
+              "Armor": 5}
 
     krasnal = {'name': "Krasnal",
+               "live": 100,
                'weapon': "Axe",
                'age': 42,
                'x': PLAYER_START_X,
                "y": PLAYER_START_Y,
                "icon": PLAYER_ICON,
-               "live": 100}
+               "Dmg": 5,
+               "Armor": 5}
 
     elf = {'name': "elf",
+           "live": 200,
            'weapon': "sword",
            'age': 442,
            'x': PLAYER_START_X,
            "y": PLAYER_START_Y,
            "icon": PLAYER_ICON,
-           "live": 200}
 
-    choice = input("Do you want to create player[1] or choose player[2]")
+           "Dmg": 5,
+           "Armor": 5}
+    question = "Do you want to create player[1] or choose player[2]"
+    choice = input_validator(question)
     if int(choice) == 1:
-
         items_to_change = 0
         for x in player:
             if items_to_change == 3:
@@ -50,13 +60,13 @@ def create_player():
 
     players = [player, krasnal, elf]
     counter = 0
+    question = "Choose player by entering the number: "
     if int(choice) == 2:
         for x in players:
-
             x = x.get('name')
             print(f'{counter}-{x}')
             counter += 1
-        x = input("Choose player by entering the number: ")
+        x = input_validator(question)
         print(players[int(x)]['name'])
         return players[int(x)]
 
@@ -82,6 +92,7 @@ def player_movement(board, player, key):
 def main():
     player = create_player()
     live_level(player)
+    display_player(player)
     board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT, BOARD_BORDER)
     engine.put_items_on_board(board, player)
     # util.clear_screen()

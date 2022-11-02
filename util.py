@@ -32,3 +32,14 @@ def clear_screen():
         os.system('cls')
     else:
         os.system('clear')
+
+
+def input_validator(prompt):
+    while True:
+        user_input = input(prompt)
+        try:
+            user_input = int(user_input)
+            break
+        except ValueError:
+            continue
+    return user_input
