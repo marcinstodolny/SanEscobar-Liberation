@@ -18,7 +18,15 @@ def create_player():
     Returns:
     dictionary
     '''
-    pass
+
+    player = {'name': "",
+              'weapon': "",
+              'age': 42}
+
+    for x in player:
+        player[x] = input(f"Enter player's {x}: ")
+
+    return player
 
 
 def main():
