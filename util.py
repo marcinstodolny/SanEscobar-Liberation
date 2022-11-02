@@ -1,10 +1,12 @@
 import sys
 import os
+from main import create_player
 
 
 def key_pressed():
     try:
-        import tty, termios
+        import tty
+        import termios
     except ImportError:
         try:
             # probably Windows

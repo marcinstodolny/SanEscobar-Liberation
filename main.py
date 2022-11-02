@@ -13,13 +13,15 @@ BOARD_BORDER = "#"
 
 def create_player():
 
-    player = {'name': "Maciej1",
-              'weapon': "d",
-              'age': 1,
+    player = {'name': "Maciej",
+              'weapon': "sword",
+              'age': 99,
               'x': PLAYER_START_X,
               "y": PLAYER_START_Y,
               "icon": PLAYER_ICON,
-              "live": 100}
+              "live": 100,
+              "Dmg": 5,
+              "Armor": 5}
 
     krasnal = {'name': "Krasnal",
                'weapon': "Axe",
@@ -27,7 +29,10 @@ def create_player():
                'x': PLAYER_START_X,
                "y": PLAYER_START_Y,
                "icon": PLAYER_ICON,
-               "live": 100}
+               "live": 100,
+                "Dmg": 5,
+                "Armor": 5}
+
 
     elf = {'name': "elf",
            'weapon': "sword",
@@ -35,15 +40,39 @@ def create_player():
            'x': PLAYER_START_X,
            "y": PLAYER_START_Y,
            "icon": PLAYER_ICON,
-           "live": 200}
+           "live": 200,
+            "Dmg": 5,
+            "Armor": 5}
 
-    # for x in player:
-    #     if x == "x":
-    #         break
-    #     player[x] = input(f"Enter player's {x}: ")
+    choice = input("Do you want to create player[1] or choose player[2]")
+    if int(choice) == 1:
+
+        items_to_change = 0
+        for x in player:
+            if items_to_change == 3:
+                break
+            player[x] = input(f"Enter player's {x}: ")
+            items_to_change += 1
+        return player
 
     players = [player, krasnal, elf]
     counter = 0
+    if int(choice) == 2:
+        for x in players:
+
+            x = x.get('name')
+            print(f'{counter}-{x}')
+            counter += 1
+        x = input("Choose player by entering the number: ")
+        print(players[int(x)]['name'])
+        return players[int(x)]
+
+
+def live_level(player):
+    if player['live'] < 20:
+        print("you die!!!!!!!!!!!!!!!!")
+    if player['live'] > 20:
+        print("still  alive")
 
     for x in players:
         counter += 1
@@ -52,7 +81,6 @@ def create_player():
     x = input("Choose player by entering the number: ")
     print(players[int(x)]['name'])
     return players[int(x)]
-
 
 
 def main():

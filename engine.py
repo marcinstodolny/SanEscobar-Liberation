@@ -1,6 +1,8 @@
 import random
+
 ITEMS_ICON = ["+", "&", "$", "="]
 ITEMS_MEANING = {"+": "Sword", "&": "Wand", "$": "Shield", "=": "Axe"}
+
 def create_board(width, height, BOARD_BORDER):
     return [
         [
