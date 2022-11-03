@@ -110,6 +110,10 @@ San Escobar never meant to be a real country!
 Evil boss: RRrrraraaaargh! Take that!
 """
 
+def king_text():
+    return """ There are still some monsters left on this land!
+    We cannot enter reality with them! Please! Purge them all!
+"""
 
 outro_pic = r"""
   ........::::::::::::..           .......|...............::::::::........
@@ -361,6 +365,33 @@ __  ______  __  __   _       ______  _   ____
 """
 
 
+
+king_art = r"""
+                    .
+                   / \
+                  _\ /_
+        .     .  (,'v`.)  .     .
+        \)   ( )  ,' `.  ( )   (/
+         \`. / `-'     `-' \ ,'/
+          : '    _______    ' :
+          |  _,-'  ,-.  `-._  |
+          |,' ( )__`-'__( ) `.|
+          (|,-,'-._   _.-`.-.|)
+          /  /<( o)> <( o)>\  \
+          :  :     | |     :  :
+          |  |     ; :     |  |
+          |  |    (.-.)    |  |
+          |  |  ,' ___ `.  |  |
+          ;  |)/ ,'---'. \(|  :
+      _,-/   |/\(       )/\|   \-._
+_..--'.-(    |   `-'''-'   |    )-.`--.._
+         `.  ;`._________,':  ,'
+        ,' `/               \'`.
+             `------.------'          
+"""
+
+
+
 def title():
     print(
         r"""
@@ -442,3 +473,8 @@ def outro(player):
     sleep(3)
     print(credits)
     sys.exit()
+
+def king_speach():
+    print(king_art)
+    for character in king_text():
+        write(character)
