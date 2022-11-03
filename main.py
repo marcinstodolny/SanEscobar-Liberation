@@ -3,9 +3,9 @@ import engine
 import ui
 import classes
 import story
+import colorama
 
-
-PLAYER_ICON = "@"
+PLAYER_ICON = f"{colorama.Fore.CYAN}@{colorama.Fore.RESET}"
 PLAYER_START_X = 3
 PLAYER_START_Y = 3
 
@@ -52,22 +52,27 @@ def create_board(player,i):
         engine.put_items_on_board(board, player, BOARD_BORDER, 5, 10)
         engine.place_enemies_on_board(board, player, BOARD_BORDER, 3, 6)
         board[BOARD_HEIGHT - 2][BOARD_WIDTH - 1] = "\u2591"
+        if i > 0:
+            board[1][0] =  "\u2588"
         board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = "\u2655"
-    
-
     return board
 
 
 def main():
     util.clear_screen()
-    story.title()
+    # story.title()
     player = create_player()
     boards = [create_board(player, i) for i in range(4)]
     board = boards[0]
     collected_items = {}
+    current_board = 0
     # story.intro(player['name'])
     util.clear_screen()
     boss_x,boss_y = 8,8
+    game(player,collected_items, boards, board, current_board, boss_x,boss_y)
+
+
+def game(player,collected_items, boards, board, current_board, boss_x,boss_y):
     is_running = True
     while is_running:
         engine.put_player_on_board(board, player)
@@ -78,15 +83,21 @@ def main():
             is_running = False
         elif key == "i":
             ui.display_items(collected_items)
-            input()
+            input("click enter to continue ")
+        elif key == "o":
+            ui.icon_meaning(engine.ITEMS_MEANING)
+            input("click enter to continue ")
         elif key == "p":
-            pass
+            ui.show_statistic(player)
+            input("click enter to continue ")
+        elif key == "h":
+            ui.help()
+            input("click enter to continue ")
         else:
-            board, boards = engine.player_movement(board, player, key, collected_items, BOARD_BORDER, KING, boards)
-            if len(boards) == 1:
+            board, current_board = engine.player_movement(board, player, key, collected_items, BOARD_BORDER, KING, boards, current_board)
+            if current_board == 3:
                 boss_x,boss_y = engine.boss_movement(board, boss_x, boss_y)
         util.clear_screen()
-
 
 if __name__ == "__main__":
     main()
