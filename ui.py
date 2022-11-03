@@ -35,23 +35,32 @@ def display_player(player):
               sep=' ', end=' ', flush=True)
 
 
-def hell_of_fame():
-
+def hall_of_fame():
+    player_score = ['Anna', 9]
+    print(player_score)
     try:
         with open("hell_of_fame.csv", "r") as file:
             lines = file.readlines()
         file = [element.replace("\n", "").split(";") for element in lines]
+        print(len(file))
         for s in file:
+
             print(*s)
     except IOError:
         return []
 
-    y = sorted(file, key=lambda x: int(x[1]), reverse=True)
+    top = sorted(file, key=lambda x: int(x[1]), reverse=True)
+
+    top5 = []
+    for x, i in enumerate(top):
+        if x == 5:
+            break
+        top5.append(i)
 
     with open("hell_of_fame.csv", "w") as file:
-        for record in y:
+        for record in top5:
             row = ";".join(record)
             file.write(row + "\n")
 
 
-hell_of_fame()
+hall_of_fame()
