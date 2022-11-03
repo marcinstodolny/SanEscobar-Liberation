@@ -62,14 +62,14 @@ def place_enemies_on_board(board, player, BOARD_BORDER, min_num, max_num):
 def king(king_icon,key, board, player, collected_items):
     if board[player["x"]][player["y"]] == king_icon:
         if count_enemies(board) > 0:
-            print("You have to defeat all enemies to reach the next level")
+            story.king_speach_1()
             input()
             if key == "s":
                 player["x"] -=1
             elif key == "d":
                 player["y"] -= 1
         else:
-            print("You have shown that you are worthy to go to the next level\nHere is a key to the door behind me")
+            story.king_speach_2()
             input()
             collected_items["Key"] = 1
 
