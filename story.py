@@ -102,35 +102,6 @@ I hope they didn't forget to place it there...
 Anyway, let me level up you so you could kill the final boss.
 """
 
-
-story_pic02 = r"""
-         .            )        )
-                  (  (|              .
-              )   )\/ ( ( (
-      *  (   ((  /     ))\))  (  )    )
-    (     \   )\(          |  ))( )  (|
-    >)     ))/   |          )/  \((  ) \
-    (     (      .        -.     V )/   )(    (
-     \   /     .   \            .       \))   ))
-       )(      (  | |   )            .    (  /
-      )(    ,'))     \ /          \( `.    )
-      (\>  ,'/__      ))            __`.  /
-     ( \   | /  ___   ( \/     ___   \ | ( (
-      \.)  |/  /   \__      __/   \   \|  ))
-     .  \. |>  \      | __ |      /   <|  /
-          )/    \____/ :..: \____/     \ <
-   )   \ (|__  .      / ;: \          __| )  (
-  ((    )\)  ~--_     --  --      _--~    /  ))
-   \    (    |  ||               ||  |   (  /
-         \.  |  ||_             _||  |  /
-           > :  |  ~V+-I_I_I-+V~  |  : (.
-          (  \:  T\   _     _   /T  : ./
-           \  :    T^T T-+-T T^T    ;<
-            \..`_       -+-       _'  )
-  )            . `--=.._____..=--'. ./ 
-"""
-
-
 def story_txt02(player):
     return f"""Turn back or I will end you, {player}!
 San Escobar never meant to be a real country!
