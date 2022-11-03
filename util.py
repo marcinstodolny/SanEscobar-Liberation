@@ -1,6 +1,7 @@
 import sys
 import os
 from main import create_player
+import ui
 
 
 def key_pressed():
@@ -32,3 +33,13 @@ def clear_screen():
         os.system("cls")
     else:
         os.system("clear")
+
+
+def input_validator(prompt, possible_options, character=False):
+    user_input = input(prompt)
+    while user_input not in possible_options:
+        clear_screen()
+        if character:
+            ui.display_classes(character)
+        user_input = input(f"Try again\n{prompt}")
+    return int(user_input)
