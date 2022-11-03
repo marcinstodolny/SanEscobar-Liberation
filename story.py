@@ -114,11 +114,12 @@ Evil boss: RRrrraraaaargh! Take that!
 
 def king_text1():
     return """There are still some monsters left on this land!
-    We cannot enter reality with them! Please! Purge them all!
+We cannot enter reality with them! Please! Purge them all!
 """
 
 def king_text2():
     return """Thank you for making this land safe!
+Take this key to new area.
 """
 
 outro_pic = r"""
