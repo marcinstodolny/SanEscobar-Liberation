@@ -39,28 +39,30 @@ def display_player(player):
 
 
 def hall_of_fame():
-    player_score = ['Anna', 9]
-    print(player_score)
+
+    player_score = ['Anna', '99']
+    # open file
     try:
         with open("hell_of_fame.csv", "r") as file:
             lines = file.readlines()
         file = [element.replace("\n", "").split(";") for element in lines]
-        print(len(file))
-        for s in file:
-
-            print(*s)
     except IOError:
         return []
+    for s in file:
+        print(*s)
 
+    # append new result
+    file.append(player_score)
+    # sorting LB
     top = sorted(file, key=lambda x: int(x[1]), reverse=True)
 
-    top5 = []
-    for x, i in enumerate(top):
-        if x == 5:
-            break
-        top5.append(i)
-
+    # writing to the file top5 results
     with open("hell_of_fame.csv", "w") as file:
-        for record in top5:
+        for i, record in enumerate(top):
+            if i == 5:
+                break
             row = ";".join(record)
             file.write(row + "\n")
+
+
+hall_of_fame()
