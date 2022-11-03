@@ -39,7 +39,7 @@ def display_player(player):
 
 
 def hall_of_fame():
-
+    # import player score after game in this format
     player_score = ['Anna', '99']
     # open file
     try:
@@ -48,8 +48,8 @@ def hall_of_fame():
         file = [element.replace("\n", "").split(";") for element in lines]
     except IOError:
         return []
-    for s in file:
-        print(*s)
+    for i, s in enumerate(file, 1):
+        print(i, "-", *s)
 
     # append new result
     file.append(player_score)
@@ -63,6 +63,3 @@ def hall_of_fame():
                 break
             row = ";".join(record)
             file.write(row + "\n")
-
-
-hall_of_fame()
