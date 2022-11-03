@@ -1,6 +1,7 @@
 import sys
 import os
 from main import create_player
+import ui
 
 
 def key_pressed():
@@ -13,9 +14,9 @@ def key_pressed():
             import msvcrt
         except ImportError:
             # FIXME what to do on other platforms?
-            raise ImportError('getch not available')
+            raise ImportError("getch not available")
         else:
-            return msvcrt.getch().decode('utf-8')
+            return msvcrt.getch().decode("utf-8")
     else:
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
@@ -29,17 +30,16 @@ def key_pressed():
 
 def clear_screen():
     if os.name == "nt":
-        os.system('cls')
+        os.system("cls")
     else:
-        os.system('clear')
+        os.system("clear")
 
 
-def input_validator(prompt):
-    while True:
-        user_input = input(prompt)
-        try:
-            user_input = int(user_input)
-            break
-        except ValueError:
-            continue
-    return user_input
+def input_validator(prompt, possible_options, character=False):
+    user_input = input(prompt)
+    while user_input not in possible_options:
+        clear_screen()
+        if character:
+            ui.display_classes(character)
+        user_input = input(f"Try again\n{prompt}")
+    return int(user_input)

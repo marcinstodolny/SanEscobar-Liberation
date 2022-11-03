@@ -1,10 +1,12 @@
+
 import os
 from operator import itemgetter
 
 
+
 def display_board(board):
     for item in board:
-        print("".join(item))
+        print(" ".join(item))
 
 
 def display_items(items_list):
@@ -12,10 +14,13 @@ def display_items(items_list):
         print(f"{key} : {value}")
 
 
-def display_player(player):
-    os.system("")
-    zzz = player
 
+def display_classes(players):
+    for counter, classes in enumerate(players, start=1):
+        print(f"{counter} - {classes['name']}")
+
+
+def display_player(player):
     class style():
         BLACK = '\033[30m'
         RED = '\033[31m'
@@ -27,12 +32,15 @@ def display_player(player):
         WHITE = '\033[37m'
         UNDERLINE = '\033[4m'
         RESET = '\033[0m'
+        
+        
+    for key, value in player.items():
+      if key == "weapon":
+      break
+    print(f"{style.MAGENTA}{key}: {str(value)}{style.RESET}",
+      sep=' ', end=' ', flush=True)
 
-    for key, value in zzz.items():
-        if key == "weapon":
-            break
-        print(f"{style.MAGENTA}{key}: {str(value)}",
-              sep=' ', end=' ', flush=True)
+
 
 
 def hall_of_fame():
