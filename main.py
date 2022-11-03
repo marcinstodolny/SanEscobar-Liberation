@@ -4,6 +4,7 @@ import ui
 import classes
 import story
 
+
 PLAYER_ICON = "@"
 PLAYER_START_X = 3
 PLAYER_START_Y = 3
@@ -27,7 +28,6 @@ def choose_precreated_class(character):
     )
     util.clear_screen()
     return character[int(user_choice) - 1]
-
 
 def create_player():
     human, dwarf, elf = classes.possible_classes(
