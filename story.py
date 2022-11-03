@@ -216,7 +216,6 @@ enemy2 = r"""
  -`J-d 
 """
 
-
 def intro(player):
     print(intro_pic01)
     for character in intro_txt01():
