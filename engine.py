@@ -4,7 +4,7 @@ import story
 import ui
 import util
 from time import sleep
-ITEMS_MEANING = {"\U000026CF": "Pick", "\u16D9": "Wand", "\u26E8": "Shield", "\U000026B8": "Sword", "\u2764":"Potion"}
+ITEMS_MEANING = {"\U000026CF": "Pick", "\u16D9": "Wand", "\u26E8": "Shield", "\U000026B8": "Sword", "\u2661":"Potion"}
 DMG_ITEMS = {"Sword": 2, "Wand": 3, "Axe": 1}
 ARMOR_ITEMS = {"Shield": 1}
 HEALTH_ITEMS = {"Potion": 50}
@@ -21,6 +21,7 @@ def create_board(width, height, BOARD_BORDER):
         for j in range(height)
     ]
 
+# def add_walls
 
 def check_border(direction, iterator):
     return iterator in [0] + [direction - k for k in [0, 1]]
