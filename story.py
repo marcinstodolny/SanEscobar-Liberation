@@ -111,9 +111,9 @@ story_pic02 = r"""
             \..`_       -+-       _'  )
   )            . `--=.._____..=--'. ./ 
 """
-story_txt02 = f"""Turn back or I will end you, {player["name"]}! 
+story_txt02 = f"""Turn back or I will end you, {player}! 
 San Escobar never meant to be a real country!
-{player["name"]}: So why Polish Ministry of Foreign Affairs claims to have such good relationships with us, huh?!
+{player}: So why Polish Ministry of Foreign Affairs claims to have such good relationships with us, huh?!
 Evil boss: RRrrraraaaargh! Take that!
 """
 outro_pic = r"""
