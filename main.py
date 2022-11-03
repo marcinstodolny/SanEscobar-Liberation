@@ -64,7 +64,7 @@ def main():
     boards = [create_board(player, i) for i in range(4)]
     board = boards[0]
     collected_items = {}
-    story.intro(player['name'])
+    # story.intro(player['name'])
     util.clear_screen()
     boss_x,boss_y = 8,8
     is_running = True
