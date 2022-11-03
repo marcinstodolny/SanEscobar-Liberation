@@ -60,7 +60,9 @@ Stork: Greetings {player}! I came from Poland with a mission!
 {player}: What mission?
 Stork: You must establish San Escobar in the real world! Transform fantasy into reality!
 {player}: ...but how? Only Poland recognizes our existence!
-You need to find a wizard! He will level you up and show you the way!
+Stork: You must defeat all monsters in our land! We cannot enter the real world with them!
+{player}: ...but how? Some of them are too powerful for me!
+Stork: Find a wizard, {player}! He will level you up and show you the way!
 """
 
 
@@ -96,8 +98,8 @@ story_pic1 = r"""
 
 def story_txt01(player):
     return f"""{player}! You have finally found me!
-I'll show you the way! You need to go right and down.
-There should be a gate there...
+I'll show you the way! You need to go all the way down and then right.
+There should be a gate there with a king...
 I hope they didn't forget to place it there...
 Anyway, let me level up you so you could kill the final boss.
 """
@@ -110,9 +112,14 @@ San Escobar never meant to be a real country!
 Evil boss: RRrrraraaaargh! Take that!
 """
 
-def king_text():
-    return """ There are still some monsters left on this land!
-    We cannot enter reality with them! Please! Purge them all!
+def king_text1():
+    return """There are still some monsters left on this land!
+We cannot enter reality with them! Please! Purge them all!
+"""
+
+def king_text2():
+    return """Thank you for making this land safe!
+Take this key to new area.
 """
 
 outro_pic = r"""
@@ -457,6 +464,7 @@ def story_wizard(player):
     sleep(2)
 
 
+
 def story_final_boss(player):
     print(BOSS_art)
     for character in story_txt02(player):
@@ -474,7 +482,12 @@ def outro(player):
     print(credits)
     sys.exit()
 
-def king_speach():
+def king_speach_1():
     print(king_art)
-    for character in king_text():
+    for character in king_text1():
+        write(character)
+
+def king_speach_2():
+    print(king_art)
+    for character in king_text2():
         write(character)

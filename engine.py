@@ -11,6 +11,7 @@ DMG_ITEMS = {"Dagger": 2, "Wand": 3, "Pick": 1}
 ARMOR_ITEMS = {"Shield": 1}
 HEALTH_ITEMS = {"Potion": 50}
 ENEMIES = [colorama.Fore.RED +"\u2620" + colorama.Fore.RESET]
+WIZARD = [colorama.Fore.YELLOW +"\u26E4" + colorama.Fore.RESET]
 
 
 def create_board(width, height, BOARD_BORDER, i):
@@ -88,14 +89,14 @@ def place_enemies_on_board(board, player, BOARD_BORDER, min_num, max_num):
 def king(king_icon,key, board, player, collected_items):
     if board[player["x"]][player["y"]] == king_icon:
         if count_enemies(board) > 0:
-            print("You have to defeat all enemies to reach the next level")
+            story.king_speach_1()
             input()
             if key == "s":
                 player["x"] -=1
             elif key == "d":
                 player["y"] -= 1
         else:
-            print("You have shown that you are worthy to go to the next level\nHere is a key to the door behind me")
+            story.king_speach_2()
             input()
             collected_items["Key"] = 1
 
@@ -159,6 +160,9 @@ def item_enemy_check(board, player, collected_items):
         equipment_to_stats(item, player)
     elif location in ENEMIES:
         fight_with_enemy(player)
+    elif location in WIZARD:
+        story.story_wizard(player["name"])
+        player['health'] += 100
 
 
 
@@ -187,7 +191,7 @@ def fight_with_enemy(player, boss=False):
 def fight_core(enemy,enemies_picture,fight,player, current_round):
     while enemy["health"] > 0:
         print(enemies_picture[enemy["name"]])
-        print(f"You have {player['health']} hp                    {enemy['name']} have {enemy['health']} hp")
+        print(f"You have {player['health']} hp                    {enemy['name']} has {enemy['health']} hp")
         current_player = fight[current_round % 2]
         current_enemy = fight[(current_round+1) % 2]
         damage = random_damage(current_player)
