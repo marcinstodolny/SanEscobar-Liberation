@@ -1,6 +1,6 @@
-from main import *
-from util import *
-
+import sys
+from time import sleep
+import util
 
 intro_pic01 = r"""
     .                  .-.    .  _   *     _   .
@@ -19,8 +19,12 @@ intro_pic01 = r"""
  `::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.'
     `:::::::::::::::::::::::::::::::::::::::::::::::::::::::.'
 """
-intro_txt01 = """In the far distant land of San Escobar, 
+
+
+def intro_txt01():
+    return """In the far distant land of San Escobar, 
 not so far away from Santo Domestos..."""
+
 
 intro_pic02 = r"""
                      ,-~.
@@ -47,6 +51,16 @@ intro_pic02 = r"""
                       ||         
                     _ ;; _
                    "-' ` -"
+"""
+
+
+def intro_txt02(player):
+    return f"""A young hero was approached by a stork:
+Stork: Greetings {player}! I came from Poland with a mission!
+{player}: What mission?
+Stork: You must establish San Escobar in the real world! Transform fantasy into a reality!
+{player}: ...but how? Only Poland recognizes our existence!
+You need to find a wizard! He will level up you and show you the way!
 """
 
 
@@ -78,12 +92,16 @@ story_pic1 = r"""
         || |    (        ,' /   /   |
         ||                ,'   /    |
 """
-story_txt01 = f"""{player}! You have finally found me!
+
+
+def story_txt01(player):
+    return f"""{player}! You have finally found me!
 I'll show you the way! You need to go right and down.
 There should be a gate there...
 I hope they didn't forget to place it there...
 Anyway, let me level up you so you could kill the final boss.
 """
+
 
 story_pic02 = r"""
          .            )        )
@@ -111,11 +129,16 @@ story_pic02 = r"""
             \..`_       -+-       _'  )
   )            . `--=.._____..=--'. ./ 
 """
-story_txt02 = f"""Turn back or I will end you, {player}! 
+
+
+def story_txt02(player):
+    return f"""Turn back or I will end you, {player}!
 San Escobar never meant to be a real country!
 {player}: So why Polish Ministry of Foreign Affairs claims to have such good relationships with us, huh?!
 Evil boss: RRrrraraaaargh! Take that!
 """
+
+
 outro_pic = r"""
   ........::::::::::::..           .......|...............::::::::........
      .:::::;;;;;;;;;;;:::::.... .     \   | ../....::::;;;;:::::.......
@@ -130,11 +153,14 @@ outro_pic = r"""
       _X                    _X           x                *          x     X_
 """
 
-outro_text = f""" It was a great day for whole nation of San Escobar.
+
+def outro_text(player):
+    return f""" It was a great day for whole nation of San Escobar.
 What was previously a pure fantasy, became a reality - a true
 South American country with all it's modern-day problems.
 Thank you, {player}!
 """
+
 
 game_over = r"""
  / _____)  /\  |  ___ \(_______)   / ___ \| |  | (_______|_____ \ 
@@ -175,8 +201,8 @@ BOSS_art = r"""
  \_____/
 """
 
-#gfdsgfdsgfds 
-x,y = 1,1
+# gfdsgfdsgfds
+x, y = 1, 1
 # board[x][y+1] = "/"
 # board[x][y+2] = "\\"
 # board[x][y+7] = "/"
@@ -205,24 +231,19 @@ x,y = 1,1
 # board[x+4][y+6] = "_"
 # board[x+4][y+7] = "/"
 
+
 def intro(player):
-  intro_txt02 = f"""A young hero was approached by a stork:
-Stork: Greetings {player}! I came from Poland with a mission!
-{player}: What mission?
-Stork: You must establish San Escobar in the real world! Transform fantasy into a reality!
-{player}: ...but how? Only Poland recognizes our existence!
-You need to find a wizard! He will level up you and show you the way!
-"""
-  print(intro_pic01)
-  for character in intro_txt01:
-      sys.stdout.write(character)
-      sys.stdout.flush()
-      sleep(0.05)
-  sleep(2)
-  clear_screen()
-  print(intro_pic02)
-  for character in intro_txt02:
-      sys.stdout.write(character)
-      sys.stdout.flush()
-      sleep(0.05)
-  sleep(2)
+    
+    print(intro_pic01)
+    for character in intro_txt01():
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        sleep(0.05)
+    sleep(2)
+    util.clear_screen()
+    print(intro_pic02)
+    for character in intro_txt02(player):
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        sleep(0.05)
+    sleep(2)
