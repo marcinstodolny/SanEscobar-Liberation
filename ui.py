@@ -2,6 +2,7 @@ import story
 import sys
 import os
 from operator import itemgetter
+import colorama
 
 def display_board(board):
     for item in board:
@@ -36,17 +37,24 @@ def display_player(player):
         if key in names:
             print(f"{style.MAGENTA}{key}: {str(value)}{style.RESET}",
                 sep=' ', end=' ', flush=True)
+    print("                   Press H for help")
 
-        
+def show_statistic(player):
+    print(f"Damage: {player['dmg']}\nArmor: {player['armor']}")
+
+def help():
+    print(f"Possible keys:\nWASD: moving character\nI: show inventory\nQ: quit game\nP: show statistic\nO: items meaning")
+
+def icon_meaning(icons):
+    for k,v in icons.items():
+        print(f"{k}  {v}")
+    
+
 def health_level(player, enemy,current_player):
-    if current_player != player:
-        if player["health"] <= 0:
-            print(story.game_over)
-            sys.exit()
-        print(f"You have {player['health']} health left")
-    elif enemy['health'] > 0:
-        print(f"Enemy has {enemy['health']} health left")
-    else:
+    if current_player != player and player["health"] <= 0:
+        print(story.game_over)
+        sys.exit()
+    elif enemy["health"] <= 0:
         print(f"{enemy['name']} has been defeated")
             
 def show_dmg(player, player2, dmg, block):
