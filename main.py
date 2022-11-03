@@ -52,7 +52,7 @@ def create_board(player,i):
         engine.put_items_on_board(board, player, BOARD_BORDER, 5, 10)
         engine.place_enemies_on_board(board, player, BOARD_BORDER, 3, 6)
         board[BOARD_HEIGHT - 2][BOARD_WIDTH - 1] = "\u2591"
-        # board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = "\u2655"
+        board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = "\u2655"
     
 
     return board
@@ -64,9 +64,8 @@ def main():
     boards = [create_board(player, i) for i in range(4)]
     board = boards[0]
     collected_items = {}
-    # story.intro(player['name'])
-
-    # util.clear_screen()
+    story.intro(player['name'])
+    util.clear_screen()
     boss_x,boss_y = 8,8
     is_running = True
     while is_running:
@@ -85,7 +84,7 @@ def main():
             board, boards = engine.player_movement(board, player, key, collected_items, BOARD_BORDER, KING, boards)
             if len(boards) == 1:
                 boss_x,boss_y = engine.boss_movement(board, boss_x, boss_y)
-        # util.clear_screen()
+        util.clear_screen()
 
 
 if __name__ == "__main__":
