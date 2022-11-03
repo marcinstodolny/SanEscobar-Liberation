@@ -102,6 +102,7 @@ I hope they didn't forget to place it there...
 Anyway, let me level up you so you could kill the final boss.
 """
 
+
 def story_txt02(player):
     return f"""Turn back or I will end you, {player}!
 San Escobar never meant to be a real country!
@@ -358,8 +359,13 @@ __  ______  __  __   _       ______  _   ____
  / / /_/ / /_/ /    | |/ |/ / /_/ / /|  /_/  
 /_/\____/\____/     |__/|__/\____/_/ |_(_) 
 """
+
+
 def title():
-  print(r"""
+    print(
+        r"""
+
+
   ██████  ▄▄▄       ███▄    █    ▓█████   ██████  ▄████▄   ▒█████   ▄▄▄▄    ▄▄▄       ██▀███  
 ▒██    ▒ ▒████▄     ██ ▀█   █    ▓█   ▀ ▒██    ▒ ▒██▀ ▀█  ▒██▒  ██▒▓█████▄ ▒████▄    ▓██ ▒ ██▒
 ░ ▓██▄   ▒██  ▀█▄  ▓██  ▀█ ██▒   ▒███   ░ ▓██▄   ▒▓█    ▄ ▒██░  ██▒▒██▒ ▄██▒██  ▀█▄  ▓██ ░▄█ ▒
@@ -379,11 +385,21 @@ def title():
 ░ ░ ▒  ░ ▒ ░▒░▒   ░  ░ ░  ░  ░▒ ░ ▒░  ▒   ▒▒ ░   ░     ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░                
   ░ ░    ▒ ░ ░    ░    ░     ░░   ░   ░   ▒    ░       ▒ ░░ ░ ░ ▒     ░   ░ ░                 
     ░  ░ ░   ░         ░  ░   ░           ░  ░         ░      ░ ░           ░                 
-""")
-  sleep(3)
+
+"""
+    )
+    sleep(3)
+
 
 def enemies_list():
-  return {"Alien":Alien, "Demon":Demon, "Dinosaur":Dinosaur, "Dragon":Dragon, "Boss":BOSS_art}
+    return {
+        "Alien": Alien,
+        "Demon": Demon,
+        "Dinosaur": Dinosaur,
+        "Dragon": Dragon,
+        "Boss": BOSS_art,
+    }
+
 
 def intro(player):
     print(intro_pic01)
@@ -396,10 +412,12 @@ def intro(player):
         write(character)
     sleep(2)
 
+
 def write(character):
     sys.stdout.write(character)
     sys.stdout.flush()
     sleep(0.05)
+
 
 def story_wizard(player):
     print(story_pic1)
@@ -407,11 +425,13 @@ def story_wizard(player):
         write(character)
     sleep(2)
 
+
 def story_final_boss(player):
     print(BOSS_art)
     for character in story_txt02(player):
         write(character)
     sleep(2)
+
 
 def outro(player):
     print(outro_pic)
