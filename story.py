@@ -112,9 +112,13 @@ San Escobar never meant to be a real country!
 Evil boss: RRrrraraaaargh! Take that!
 """
 
-def king_text():
-    return """ There are still some monsters left on this land!
+def king_text1():
+    return """There are still some monsters left on this land!
     We cannot enter reality with them! Please! Purge them all!
+"""
+
+def king_text2():
+    return """Thank you for making this land safe!
 """
 
 outro_pic = r"""
@@ -477,7 +481,12 @@ def outro(player):
     print(credits)
     sys.exit()
 
-def king_speach():
+def king_speach_1():
     print(king_art)
-    for character in king_text():
+    for character in king_text1():
+        write(character)
+
+def king_speach_2():
+    print(king_art)
+    for character in king_text2():
         write(character)
