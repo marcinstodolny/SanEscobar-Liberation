@@ -1,9 +1,9 @@
 import random
 
-ITEMS_MEANING = {"+": "Sword", "&": "Wand", "$": "Shield", "=": "Axe"}
+ITEMS_MEANING = {"+": "Sword", "&": "Wand", "$": "Shield", "=": "Axe", "\u2764":"Potion"}
 DMG_ITEMS = {"Sword": 2, "Wand": 3, "Axe": 1}
 ARMOR_ITEMS = {"Shield": 1}
-HEALTH_ITEMS = {}
+HEALTH_ITEMS = {"Potion": 50}
 
 
 def create_board(width, height, BOARD_BORDER):
@@ -74,3 +74,5 @@ def equipment_to_stats(item, player):
         player["dmg"] += DMG_ITEMS[item]
     elif item in list(ARMOR_ITEMS.keys()):
         player["armor"] += ARMOR_ITEMS[item]
+    elif item in list(HEALTH_ITEMS.keys()):
+        player["health"] += HEALTH_ITEMS[item]

@@ -67,7 +67,7 @@ def main():
     player = create_player()
     board = create_board(player)
     collected_items = {}
-    # story.intro(player['name'])
+    story.intro(player['name'])
     # util.clear_screen()
     is_running = True
     while is_running:

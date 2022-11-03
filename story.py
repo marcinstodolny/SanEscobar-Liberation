@@ -219,39 +219,34 @@ enemy2 = r"""
 def intro(player):
     print(intro_pic01)
     for character in intro_txt01():
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        sleep(0.05)
+        write(character)
     sleep(2)
     util.clear_screen()
     print(intro_pic02)
     for character in intro_txt02(player):
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        sleep(0.05)
+        write(character)
     sleep(2)
+
+def write(character):
+    sys.stdout.write(character)
+    sys.stdout.flush()
+    sleep(0.05)
 
 def story_wizard(player):
     print(story_pic1)
     for character in story_txt01(player):
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        sleep(0.05)
+        write(character)
     sleep(2)
 
 def story_final_boss(player):
     print(story_pic02)
     for character in story_txt02(player):
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        sleep(0.05)
+        write(character)
     sleep(2)
 
 def outro(player):
     print(outro_pic)
     for character in outro_text(player):
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        sleep(0.05)
+        write(character)
     sleep(2)
 
