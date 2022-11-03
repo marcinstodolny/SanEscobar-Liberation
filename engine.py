@@ -83,7 +83,7 @@ def player_movement(board, player, key, collected_items, BOARD_BORDER, king_icon
     if board[player["x"]][player["y"]] == "\u2591":
         board, boards = change_board(player, boards)
     if len(boards) == 1:
-        boss_battle_check(board, player)
+        boss_battle_check(board, player, collected_items)
     return board, boards
 
 
@@ -95,10 +95,11 @@ def change_board(player, boards):
     player["y"] = 1
     return boards[0], boards
     
-def boss_battle_check(board, player):
+def boss_battle_check(board, player, collected_items):
     location = board[player["x"]][player["y"]]
     if location not in [" ", "#"]:
         fight_with_enemy(player, enemies.boss(player["name"]))
+        ui.hall_of_fame(collected_items)
         story.outro(player["name"])
 
 

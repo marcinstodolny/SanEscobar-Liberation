@@ -56,7 +56,7 @@ def show_dmg(player, player2, dmg, block):
         print(f"{player['name']} dealt {dmg - block} dmg to {player2['name']}")
 
         
-def hall_of_fame():
+def hall_of_fame(collected_items):
 
     # import player score after game in this format
     player_score = ['Anna', '99']
