@@ -60,7 +60,9 @@ Stork: Greetings {player}! I came from Poland with a mission!
 {player}: What mission?
 Stork: You must establish San Escobar in the real world! Transform fantasy into reality!
 {player}: ...but how? Only Poland recognizes our existence!
-You need to find a wizard! He will level you up and show you the way!
+Stork: You must defeat all monsters in our land! We cannot enter the real world with them!
+{player}: ...but how? Some of them are too powerful for me!
+Stork: Find a wizard, {player}! He will level you up and show you the way!
 """
 
 
