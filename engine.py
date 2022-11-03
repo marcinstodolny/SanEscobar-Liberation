@@ -6,7 +6,7 @@ import util
 from time import sleep
 import colorama
 
-ITEMS_MEANING = {"\U000026CF": "Pick", "\u16D9": "Wand", "\u26E8": "Shield", "\U0001F5E1": "Dagger", "\u2764":"Potion"}
+ITEMS_MEANING = {"\U000026CF": "Pick", "\u16D9": "Wand", "\u26E8": "Shield", "\U0001F5E1": "Dagger", "\u2661":"Potion"}
 DMG_ITEMS = {"Dagger": 2, "Wand": 3, "Pick": 1}
 ARMOR_ITEMS = {"Shield": 1}
 HEALTH_ITEMS = {"Potion": 50}
