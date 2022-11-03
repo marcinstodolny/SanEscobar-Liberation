@@ -1,4 +1,7 @@
-from  main import *
+from main import *
+from util import *
+
+player 
 
 intro_pic01 = r"""
     .                  .-.    .  _   *     _   .
@@ -181,30 +184,45 @@ BOSS_art = r"""
 
 #gfdsgfdsgfds 
 x,y = 1,1
-board[x][y+1] = "/"
-board[x][y+2] = "\"
-board[x][y+7] = "/"
-board[x][y+8] = "\"
-board[x+1][y+1] = "|"
-board[x+1][y+2] = "0"
-board[x+1][y+7] = "0"
-board[x+1][y+8] = "|"
-board[x+2][y] = "("
-board[x+2][y+1] = "_"
-board[x+2][y+5] = "^"
-board[x+2][y+8] = "_"
-board[x+2][y+9] = ")"
-board[x+3][y+1] = "|"
-board[x+3][y+2] = "V"
-board[x+3][y+3] = "\""
-board[x+3][y+4] = "\""
-board[x+3][y+5] = "\""
-board[x+3][y+6] = "V"
-board[x+3][y+7] = "|"
-board[x+4][y+1] = "\"
-board[x+4][y+2] = "_"
-board[x+4][y+3] = "_"
-board[x+4][y+4] = "_"
-board[x+4][y+5] = "_"
-board[x+4][y+6] = "_"
-board[x+4][y+7] = "/"
+# board[x][y+1] = "/"
+# board[x][y+2] = "\\"
+# board[x][y+7] = "/"
+# board[x][y+8] = "\\"
+# board[x+1][y+1] = "|"
+# board[x+1][y+2] = "0"
+# board[x+1][y+7] = "0"
+# board[x+1][y+8] = "|"
+# board[x+2][y] = "("
+# board[x+2][y+1] = "_"
+# board[x+2][y+5] = "^"
+# board[x+2][y+8] = "_"
+# board[x+2][y+9] = ")"
+# board[x+3][y+1] = "|"
+# board[x+3][y+2] = "V"
+# board[x+3][y+3] = "\\"
+# board[x+3][y+4] = "\\"
+# board[x+3][y+5] = "\\"
+# board[x+3][y+6] = "V"
+# board[x+3][y+7] = "|"
+# board[x+4][y+1] = "\\"
+# board[x+4][y+2] = "_"
+# board[x+4][y+3] = "_"
+# board[x+4][y+4] = "_"
+# board[x+4][y+5] = "_"
+# board[x+4][y+6] = "_"
+# board[x+4][y+7] = "/"
+
+def intro():
+  print(intro_pic01)
+  for character in intro_txt01:
+      sys.stdout.write(character)
+      sys.stdout.flush()
+      sleep(0.05)
+  sleep(2)
+  clear_screen()
+  print(intro_pic02)
+  for character in intro_txt02:
+      sys.stdout.write(character)
+      sys.stdout.flush()
+      sleep(0.05)
+  sleep(2)
