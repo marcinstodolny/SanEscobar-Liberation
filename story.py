@@ -375,7 +375,7 @@ l` \` `.`."`-..,-' j  /./ /, , / , / /l \   \=\l   || `' || ||...
                                  Vvv'            VVv'
 """
 def enemies_list():
-  return {"Alien":Alien, "Demon":Demon, "Dinosaur":Dinosaur, "Dragon":Dragon}
+  return {"Alien":Alien, "Demon":Demon, "Dinosaur":Dinosaur, "Dragon":Dragon, "Boss":BOSS_art}
 
 def intro(player):
     print(intro_pic01)
@@ -400,7 +400,7 @@ def story_wizard(player):
     sleep(2)
 
 def story_final_boss(player):
-    print(story_pic02)
+    print(BOSS_art)
     for character in story_txt02(player):
         write(character)
     sleep(2)
@@ -409,5 +409,7 @@ def outro(player):
     print(outro_pic)
     for character in outro_text(player):
         write(character)
-    sleep(2)
+    sleep(5)
+    print("You Won")
+    sys.exit()
 

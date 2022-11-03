@@ -82,6 +82,8 @@ def player_movement(board, player, key, collected_items, BOARD_BORDER, king_icon
     item_enemy_check(board, player, collected_items)
     if board[player["x"]][player["y"]] == "\u2591":
         board, boards = change_board(player, boards)
+    if len(boards) == 1:
+        boss_battle_check(board, player)
     return board, boards
 
 
@@ -93,6 +95,11 @@ def change_board(player, boards):
     player["y"] = 1
     return boards[0], boards
     
+def boss_battle_check(board, player):
+    location = board[player["x"]][player["y"]]
+    if location not in [" ", "#"]:
+        fight_with_enemy(player, enemies.boss(player["name"]))
+        story.outro(player["name"])
 
 
 def item_enemy_check(board, player, collected_items):
@@ -119,9 +126,13 @@ def equipment_to_stats(item, player):
         player["health"] += HEALTH_ITEMS[item]
 
 
-def fight_with_enemy(player):
-    enemy = random.choice(enemies.possible_classes())
-    fight = [player, enemy]
+def fight_with_enemy(player, boss=False):
+    if boss:
+        enemy = boss
+        fight = [player, boss]
+    else:
+        enemy = random.choice(enemies.possible_classes())
+        fight = [player, enemy]
     current_round = 0
     util.clear_screen()
     enemies_picture = story.enemies_list()
