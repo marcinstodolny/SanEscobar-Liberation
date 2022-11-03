@@ -34,8 +34,10 @@ def put_player_on_board(board, player):
     board[player["x"]][player["y"]] = player["icon"]
 
 
+
 def put_items_on_board(board, player, BOARD_BORDER, min_num, max_num):
     item_number = random.randint(min_num, max_num)
+
     items_icon = list(ITEMS_MEANING.keys())
     for _ in range(item_number):
         x, y = random.randint(1, len(board) - 1), random.randint(1, len(board[0]) - 1)
@@ -43,6 +45,7 @@ def put_items_on_board(board, player, BOARD_BORDER, min_num, max_num):
             board[x][y] = random.choice(items_icon)
         else:
             item_number += 1
+
 
 def place_enemies_on_board(board, player, BOARD_BORDER, min_num, max_num):
     enemies_number = random.randint(min_num, max_num)
@@ -68,6 +71,7 @@ def player_movement(board, player, key, collected_items, BOARD_BORDER, king_icon
     if key == "s" and board[player["x"] + 1][player["y"]] != BOARD_BORDER:
         player["x"] += 1
         king(king_icon,key, board, player)
+
     if key == "w" and board[player["x"] - 1][player["y"]] != BOARD_BORDER:
         player["x"] -= 1
     if key == "a" and board[player["x"]][player["y"] - 1] != BOARD_BORDER:
@@ -92,6 +96,7 @@ def change_board(player, boards):
 
 
 def item_enemy_check(board, player, collected_items):
+
     location = board[player["x"]][player["y"]]
     if location in list(ITEMS_MEANING.keys()):
         item = ITEMS_MEANING[location]
@@ -102,6 +107,7 @@ def item_enemy_check(board, player, collected_items):
         equipment_to_stats(item, player)
     elif location in ENEMIES:
         fight_with_enemy(player)
+
 
 
 def equipment_to_stats(item, player):
@@ -137,3 +143,4 @@ def fight_with_enemy(player):
 
 def random_damage(player):
     return random.randint(int(player["dmg"]*0.5), int(player["dmg"]*1.5))
+

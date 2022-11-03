@@ -4,6 +4,7 @@ import ui
 import classes
 import story
 
+
 PLAYER_ICON = "@"
 PLAYER_START_X = 3
 PLAYER_START_Y = 3
@@ -19,7 +20,7 @@ def create_own_class(character):
         character[list(character)[i]] = input(f"Enter player's {list(character)[i]}: ")
     return character
 
-
+  
 def choose_precreated_class(character):
     util.clear_screen()
     ui.display_classes(character)
@@ -53,15 +54,18 @@ def create_board(player,i):
         board[BOARD_HEIGHT - 2][BOARD_WIDTH - 1] = "\u2591"
         # board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = "\u2655"
     
+
     return board
 
 
 def main():
     player = create_player()
+
     boards = [create_board(player, i) for i in range(4)]
     board = boards[0]
     collected_items = {}
     # story.intro(player['name'])
+
     # util.clear_screen()
     is_running = True
     while is_running:

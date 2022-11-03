@@ -1,5 +1,8 @@
 import story
 import sys
+import os
+from operator import itemgetter
+
 def display_board(board):
     for item in board:
         print(" ".join(item))
@@ -33,6 +36,7 @@ def display_player(player):
             break
         print(f"{style.MAGENTA}{key}: {str(value)}{style.RESET}",
               sep=' ', end=' ', flush=True)
+
         
 def health_level(player, enemy,current_player):
     if current_player != player:
@@ -50,3 +54,29 @@ def show_dmg(player, player2, dmg, block):
         print(f"{player['name']} have missed")
     else:
         print(f"{player['name']} dealt {dmg - block} dmg to {player2['name']}")
+
+        
+def hall_of_fame():
+    player_score = ['Anna', '99']
+    # open file
+    try:
+        with open("hell_of_fame.csv", "r") as file:
+            lines = file.readlines()
+        file = [element.replace("\n", "").split(";") for element in lines]
+    except IOError:
+        return []
+    for s in file:
+        print(*s)
+
+    # append new result
+    file.append(player_score)
+    # sorting LB
+    top = sorted(file, key=lambda x: int(x[1]), reverse=True)
+
+    # writing to the file top5 results
+    with open("hell_of_fame.csv", "w") as file:
+        for i, record in enumerate(top):
+            if i == 5:
+                break
+            row = ";".join(record)
+            file.write(row + "\n")
