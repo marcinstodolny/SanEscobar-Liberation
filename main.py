@@ -22,25 +22,22 @@ def create_own_class(character):
 def choose_precreated_class(character):
     util.clear_screen()
     ui.display_classes(character)
-    user_class_choice = input("Choose character by entering the number: ")
-    while user_class_choice not in ["1", "2", "3"]:
-        util.clear_screen()
-        ui.display_classes(character)
-        user_class_choice = input("Try again\nChoose character by entering the number: ")
-    print(character[int(user_class_choice) - 1]["name"])
-    return character[int(user_class_choice) - 1]
+    user_choice = util.input_validator(
+        "Choose character by entering the number: ", ["1", "2", "3"], character
+    )
+    util.clear_screen()
+    return character[int(user_choice) - 1]
 
 
 def create_player():
     human, dwarf, elf = classes.possible_classes(
         PLAYER_START_X, PLAYER_START_Y, PLAYER_ICON
     )
-    user_choice = input("Do you want to create your own character [1] or choose default [2]: ")
-    while user_choice not in ["1", "2"]:
-        util.clear_screen()
-        user_choice = input(
-            "Try again\nDo you want to create your own character [1] or choose default [2]: "
-        )
+    util.clear_screen()
+    user_choice = util.input_validator(
+        "Do you want to create your own character [1] or choose default [2]: ",
+        ["1", "2"],
+    )
     if int(user_choice) == 1:
         return create_own_class(human)
     if int(user_choice) == 2:
