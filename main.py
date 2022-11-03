@@ -6,11 +6,11 @@ import story
 import colorama
 
 PLAYER_ICON = f"{colorama.Fore.CYAN}@{colorama.Fore.RESET}"
-PLAYER_START_X = 3
-PLAYER_START_Y = 3
-
 BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
+PLAYER_START_X = 1
+PLAYER_START_Y = BOARD_WIDTH-2
+
 BOARD_BORDER = "#"
 KING = "\u2655"
 
@@ -47,7 +47,7 @@ def create_player():
 
 
 def create_board(player,i):
-    board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT, BOARD_BORDER)
+    board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT, BOARD_BORDER, i)
     if i < 3:
         engine.put_items_on_board(board, player, BOARD_BORDER, 5, 10)
         engine.place_enemies_on_board(board, player, BOARD_BORDER, 3, 6)
@@ -67,7 +67,7 @@ def main():
     collected_items = {}
     current_board = 0
     # story.intro(player['name'])
-    util.clear_screen()
+    # util.clear_screen()
     boss_x,boss_y = 8,8
     game(player,collected_items, boards, board, current_board, boss_x,boss_y)
 

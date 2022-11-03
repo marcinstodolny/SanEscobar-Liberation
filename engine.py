@@ -6,25 +6,52 @@ import util
 from time import sleep
 import colorama
 
-ITEMS_MEANING = {"\U000026CF": "Pick", "\u16D9": "Wand", "\u26E8": "Shield", "\U0001F5E1": "Dagger", "\u2661":"Potion"}
+ITEMS_MEANING = {"\U000026CF": "Pick", "\U0000269A": "Wand", "\u26E8": "Shield", "\u2E38": "Dagger", "\u2764":"Potion"}
 DMG_ITEMS = {"Dagger": 2, "Wand": 3, "Pick": 1}
 ARMOR_ITEMS = {"Shield": 1}
 HEALTH_ITEMS = {"Potion": 50}
 ENEMIES = [colorama.Fore.RED +"\u2620" + colorama.Fore.RESET]
 
 
-
-
-def create_board(width, height, BOARD_BORDER):
-    return [
+def create_board(width, height, BOARD_BORDER, i):
+    board = [
         [
             BOARD_BORDER if check_border(height, j) or check_border(width, i) else " "
             for i in range(width)
         ]
         for j in range(height)
     ]
+    if i == 0:
+        wall_row(board, height,width)
+    elif i == 1:
+        second_map(board, height,width)
+    elif i == 2:
+        wall_column(board, height)
+    return board
 
+def wall_row(board, width,start=0):
+    
+    for i in range(start,len(board)-3,3):
+        if i % 2 == 0:
+            for j in range(width-3,):
+                board[i][j] = "#"
+        else:
+            for j in range(3,width):
+                board[i][j] = "#"
 
+def wall_column(board, height, start=0):
+     for i in range(start,len(board[0])-3,4):
+        if i % 8 == 4:
+            for j in range(height-3):
+                board[j][i] = "#"
+        else:
+            for j in range(3,height):
+                board[j][i] = "#"
+
+def second_map(board, height,width):
+    wall_row(board, int(width/2-2), 4)
+    wall_column(board, int(height), int(height-8))
+    
 def check_border(direction, iterator):
     return iterator in [0] + [direction - k for k in [0, 1]]
 
