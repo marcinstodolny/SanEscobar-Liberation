@@ -12,7 +12,7 @@ def possible_classes(PLAYER_START_X, PLAYER_START_Y, PLAYER_ICON):
     }
 
     dwarf = {
-        "name": "dwarf",
+        "name": "Dwarf",
         "weapon": "Axe",
         "age": 42,
         "x": PLAYER_START_X,
@@ -25,7 +25,7 @@ def possible_classes(PLAYER_START_X, PLAYER_START_Y, PLAYER_ICON):
     }
 
     elf = {
-        "name": "elf",
+        "name": "Elf",
         "weapon": "sword",
         "age": 442,
         "x": PLAYER_START_X,

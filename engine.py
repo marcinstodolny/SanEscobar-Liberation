@@ -98,6 +98,7 @@ def change_board(player, boards):
 def boss_battle_check(board, player, collected_items):
     location = board[player["x"]][player["y"]]
     if location not in [" ", "#"]:
+        util.clear_screen()
         fight_with_enemy(player, enemies.boss(player["name"]))
         ui.hall_of_fame(collected_items)
         story.outro(player["name"])

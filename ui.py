@@ -31,11 +31,11 @@ def display_player(player):
         UNDERLINE = '\033[4m'
         RESET = '\033[0m'
 
+    names = ["name", "health"]
     for key, value in player.items():
-        if key == "weapon":
-            break
-        print(f"{style.MAGENTA}{key}: {str(value)}{style.RESET}",
-              sep=' ', end=' ', flush=True)
+        if key in names:
+            print(f"{style.MAGENTA}{key}: {str(value)}{style.RESET}",
+                sep=' ', end=' ', flush=True)
 
         
 def health_level(player, enemy,current_player):

@@ -59,8 +59,9 @@ def create_board(player,i):
 
 
 def main():
+    util.clear_screen()
+    story.title()
     player = create_player()
-
     boards = [create_board(player, i) for i in range(4)]
     board = boards[0]
     collected_items = {}
