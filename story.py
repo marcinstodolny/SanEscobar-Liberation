@@ -127,9 +127,9 @@ outro_pic = r"""
 
 
 def outro_text(player):
-    return f"""It was a great day for whole nation of San Escobar.
-What was previously a pure fantasy, became a reality - a true
-South American country with all it's modern-day problems.
+    return f"""It was a great day for the whole nation of San Escobar.
+What was previously a pure fantasy, became reality - a true
+South American country with all its modern-day problems.
 Thank you, {player}!
 """
 
