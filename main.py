@@ -13,51 +13,50 @@ BOARD_HEIGHT = 20
 BOARD_BORDER = "#"
 
 
-def create_own_class(player):
+def create_own_class(character):
     for i in range(3):
-        player[list(player)[i]] = input(f"Enter player's {list(player)[i]}: ")
-    return player
+        character[list(character)[i]] = input(f"Enter player's {list(character)[i]}: ")
+    return character
 
 
-def choose_precreated_class(players):
+def choose_precreated_class(character):
     util.clear_screen()
-    ui.display_classes(players)
-    user_class_choice = input("Choose player by entering the number: ")
+    ui.display_classes(character)
+    user_class_choice = input("Choose character by entering the number: ")
     while user_class_choice not in ["1", "2", "3"]:
         util.clear_screen()
-        ui.display_classes(players)
-        user_class_choice = input("Try again\nChoose player by entering the number: ")
-    print(players[int(user_class_choice) - 1]["name"])
-    return players[int(user_class_choice) - 1]
+        ui.display_classes(character)
+        user_class_choice = input("Try again\nChoose character by entering the number: ")
+    print(character[int(user_class_choice) - 1]["name"])
+    return character[int(user_class_choice) - 1]
 
 
 def create_player():
-    player, dwarf, elf = classes.possible_classes(
+    human, dwarf, elf = classes.possible_classes(
         PLAYER_START_X, PLAYER_START_Y, PLAYER_ICON
     )
-    user_choice = input("Do you want to create player [1] or choose player [2]: ")
+    user_choice = input("Do you want to create your own character [1] or choose default [2]: ")
     while user_choice not in ["1", "2"]:
         util.clear_screen()
         user_choice = input(
-            "Try again\nDo you want to create player [1] or choose player [2]: "
+            "Try again\nDo you want to create your own character [1] or choose default [2]: "
         )
     if int(user_choice) == 1:
-        return create_own_class(player)
+        return create_own_class(human)
     if int(user_choice) == 2:
-        return choose_precreated_class([player, dwarf, elf])
+        return choose_precreated_class([human, dwarf, elf])
 
 
-def health_level(player, players):
-    if player["health"] <= 0:
+def health_level(character, character_list):
+    if character["health"] <= 0:
         print("you have died!")
-    if player["health"] > 0:
-        print(f"You have {player['health']} health left")
-    for counter, x in enumerate(players):
-        x = x.get("name")
-        print(f"{counter}-{x}")
-    x = input("Choose player by entering the number: ")
-    print(players[int(x)]["name"])
-    return players[int(x)]
+    if character["health"] > 0:
+        print(f"You have {character['health']} health left")
+    for counter, item in enumerate(character_list):
+        print(f"{counter}-{item.get('name')}")
+    user_choice = input("Choose player by entering the number: ")
+    print(character_list[int(user_choice)]["name"])
+    return character_list[int(user_choice)]
 
 
 def create_board(player):
@@ -71,7 +70,7 @@ def main():
     player = create_player()
     board = create_board(player)
     collected_items = {}
-    #intro(player)
+    intro(player['name'])
     # util.clear_screen()
     is_running = True
     while is_running:
