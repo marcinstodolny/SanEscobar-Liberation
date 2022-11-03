@@ -78,7 +78,7 @@ story_pic1 = r"""
         || |    (        ,' /   /   |
         ||                ,'   /    |
 """
-story_txt01 = f"""{player["name"]}! You have finally found me!
+story_txt01 = f"""{player}! You have finally found me!
 I'll show you the way! You need to go right and down.
 There should be a gate there...
 I hope they didn't forget to place it there...
@@ -133,7 +133,7 @@ outro_pic = r"""
 outro_text = f""" It was a great day for whole nation of San Escobar.
 What was previously a pure fantasy, became a reality - a true
 South American country with all it's modern-day problems.
-Thank you, {player["name"]}!
+Thank you, {player}!
 """
 
 game_over = r"""
