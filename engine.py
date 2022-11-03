@@ -144,3 +144,38 @@ def fight_with_enemy(player):
 def random_damage(player):
     return random.randint(int(player["dmg"]*0.5), int(player["dmg"]*1.5))
 
+def boss_coordinates(boss_x, boss_y):
+    boss_x += random.randint(-1,1)
+    boss_y += random.randint(-1,1)
+    if boss_x > 12:
+        boss_x = 11
+    elif boss_x < 3:
+        boss_x = 4
+    if boss_y > 20:
+        boss_y = 19
+    elif boss_y < 3:
+        boss_y = 4
+    return boss_x,boss_y
+
+def boss_movement(board, boss_x_input, boss_y_input):
+    boss_x,boss_y = boss_x_input, boss_y_input
+    row = 0
+    for i in enumerate(story.small_boss):
+        if i[1] == "\n":
+            row += 1
+            continue
+        elif row > 0:
+            board[boss_x + row][boss_y + int(i[0])-10*row] = " "
+        elif row == 0:
+            board[boss_x + row][boss_y + int(i[0])] = " "
+    boss_x,boss_y = boss_coordinates(boss_x_input,boss_y_input)
+    row = 0
+    for i in enumerate(story.small_boss):
+        if i[1] == "\n":
+            row += 1
+            continue
+        elif row > 0:
+            board[boss_x + row][boss_y + int(i[0])-10*row] = i[1]
+        elif row == 0:
+            board[boss_x + row][boss_y + int(i[0])] = i[1]
+    return boss_x, boss_y

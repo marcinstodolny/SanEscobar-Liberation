@@ -67,6 +67,7 @@ def main():
     # story.intro(player['name'])
 
     # util.clear_screen()
+    boss_x,boss_y = 8,8
     is_running = True
     while is_running:
         engine.put_player_on_board(board, player)
@@ -82,6 +83,8 @@ def main():
             pass
         else:
             board, boards = engine.player_movement(board, player, key, collected_items, BOARD_BORDER, KING, boards)
+            if len(boards) == 1:
+                boss_x,boss_y = engine.boss_movement(board, boss_x, boss_y)
         # util.clear_screen()
 
 
