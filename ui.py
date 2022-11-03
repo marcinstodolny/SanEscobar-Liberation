@@ -57,6 +57,8 @@ def show_dmg(player, player2, dmg, block):
 
         
 def hall_of_fame():
+
+    # import player score after game in this format
     player_score = ['Anna', '99']
     # open file
     try:
@@ -65,8 +67,8 @@ def hall_of_fame():
         file = [element.replace("\n", "").split(";") for element in lines]
     except IOError:
         return []
-    for s in file:
-        print(*s)
+    for i, s in enumerate(file, 1):
+        print(i, "-", *s)
 
     # append new result
     file.append(player_score)
