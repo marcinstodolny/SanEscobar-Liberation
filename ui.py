@@ -3,7 +3,6 @@ import os
 from operator import itemgetter
 
 
-
 def display_board(board):
     for item in board:
         print(" ".join(item))
@@ -12,7 +11,6 @@ def display_board(board):
 def display_items(items_list):
     for key, value in items_list.items():
         print(f"{key} : {value}")
-
 
 
 def display_classes(players):
@@ -32,15 +30,12 @@ def display_player(player):
         WHITE = '\033[37m'
         UNDERLINE = '\033[4m'
         RESET = '\033[0m'
-        
-        
+
     for key, value in player.items():
-      if key == "weapon":
-      break
-    print(f"{style.MAGENTA}{key}: {str(value)}{style.RESET}",
-      sep=' ', end=' ', flush=True)
-
-
+        if key == "weapon":
+            break
+        print(f"{style.MAGENTA}{key}: {str(value)}{style.RESET}",
+              sep=' ', end=' ', flush=True)
 
 
 def hall_of_fame():
@@ -69,6 +64,3 @@ def hall_of_fame():
         for record in top5:
             row = ";".join(record)
             file.write(row + "\n")
-
-
-hall_of_fame()
