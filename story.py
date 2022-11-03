@@ -102,35 +102,6 @@ I hope they didn't forget to place it there...
 Anyway, let me level up you so you could kill the final boss.
 """
 
-
-story_pic02 = r"""
-         .            )        )
-                  (  (|              .
-              )   )\/ ( ( (
-      *  (   ((  /     ))\))  (  )    )
-    (     \   )\(          |  ))( )  (|
-    >)     ))/   |          )/  \((  ) \
-    (     (      .        -.     V )/   )(    (
-     \   /     .   \            .       \))   ))
-       )(      (  | |   )            .    (  /
-      )(    ,'))     \ /          \( `.    )
-      (\>  ,'/__      ))            __`.  /
-     ( \   | /  ___   ( \/     ___   \ | ( (
-      \.)  |/  /   \__      __/   \   \|  ))
-     .  \. |>  \      | __ |      /   <|  /
-          )/    \____/ :..: \____/     \ <
-   )   \ (|__  .      / ;: \          __| )  (
-  ((    )\)  ~--_     --  --      _--~    /  ))
-   \    (    |  ||               ||  |   (  /
-         \.  |  ||_             _||  |  /
-           > :  |  ~V+-I_I_I-+V~  |  : (.
-          (  \:  T\   _     _   /T  : ./
-           \  :    T^T T-+-T T^T    ;<
-            \..`_       -+-       _'  )
-  )            . `--=.._____..=--'. ./ 
-"""
-
-
 def story_txt02(player):
     return f"""Turn back or I will end you, {player}!
 San Escobar never meant to be a real country!
@@ -193,6 +164,15 @@ credits = r"""
  | |  | | (_| | |  | |_| |_| | | | | (_| | | |  | | (_| | | | (__| | | | |   < (_) \ V  V /\__ \   < (_| |
  |_|  |_|\__,_|_|   \__|\__, |_| |_|\__,_| |_|  |_|\__,_|_|  \___|_|_| |_|_|\_\___/ \_/\_/ |___/_|\_\__,_|
                         |___/                                                                             
+"""
+
+small_boss = r"""
+ /\   /\ 
+ |0   0| 
+(_  ^  _)
+ |V\"""V| 
+ |V\"""V| 
+ \_____/ 
 """
 
 BOSS_art = r"""
@@ -389,7 +369,7 @@ def story_wizard(player):
     sleep(2)
 
 def story_final_boss(player):
-    print(story_pic02)
+    print(BOSS_art)
     for character in story_txt02(player):
         write(character)
     sleep(2)
