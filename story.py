@@ -60,7 +60,7 @@ Stork: Greetings {player}! I came from Poland with a mission!
 {player}: What mission?
 Stork: You must establish San Escobar in the real world! Transform fantasy into a reality!
 {player}: ...but how? Only Poland recognizes our existence!
-You need to find a wizard! He will level up you and show you the way!
+You need to find a wizard! He will level you up and show you the way!
 """
 
 
@@ -169,6 +169,8 @@ game_over = r"""
 | \____/| |__| | || || | |_____   | |___| | \  / | |_____      | |
  \_____/|______|_||_||_|_______)   \_____/   \/  |_______)     |_|
 """
+
+
 credits = r"""
   __  __                _         ____  _            _       _                                            
  |  \/  | __ _ _ __ ___(_)_ __   / ___|| |_ ___   __| | ___ | |_ __  _   _                                
@@ -197,43 +199,25 @@ BOSS_art = r"""
  /\   /\
  |0   0|
 (_  ^  _)
- |V\"\"\"V|
+ |V\"""V|
  \_____/
 """
 
-# gfdsgfdsgfds
-x, y = 1, 1
-# board[x][y+1] = "/"
-# board[x][y+2] = "\\"
-# board[x][y+7] = "/"
-# board[x][y+8] = "\\"
-# board[x+1][y+1] = "|"
-# board[x+1][y+2] = "0"
-# board[x+1][y+7] = "0"
-# board[x+1][y+8] = "|"
-# board[x+2][y] = "("
-# board[x+2][y+1] = "_"
-# board[x+2][y+5] = "^"
-# board[x+2][y+8] = "_"
-# board[x+2][y+9] = ")"
-# board[x+3][y+1] = "|"
-# board[x+3][y+2] = "V"
-# board[x+3][y+3] = "\\"
-# board[x+3][y+4] = "\\"
-# board[x+3][y+5] = "\\"
-# board[x+3][y+6] = "V"
-# board[x+3][y+7] = "|"
-# board[x+4][y+1] = "\\"
-# board[x+4][y+2] = "_"
-# board[x+4][y+3] = "_"
-# board[x+4][y+4] = "_"
-# board[x+4][y+5] = "_"
-# board[x+4][y+6] = "_"
-# board[x+4][y+7] = "/"
+enemy1 = r"""
+     `oo.'
+ ,.  `-')
+'^\`-' '
+   c-L'-
+"""
+enemy2 = r"""
+`oo.'
+`-')  ,.
+( `-'/^`
+ -`J-d 
+"""
 
 
 def intro(player):
-    
     print(intro_pic01)
     for character in intro_txt01():
         sys.stdout.write(character)
@@ -247,3 +231,28 @@ def intro(player):
         sys.stdout.flush()
         sleep(0.05)
     sleep(2)
+
+def story_wizard(player):
+    print(story_pic1)
+    for character in story_txt01(player):
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        sleep(0.05)
+    sleep(2)
+
+def story_final_boss(player):
+    print(story_pic02)
+    for character in story_txt02(player):
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        sleep(0.05)
+    sleep(2)
+
+def outro(player):
+    print(outro_pic)
+    for character in outro_text(player):
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        sleep(0.05)
+    sleep(2)
+
