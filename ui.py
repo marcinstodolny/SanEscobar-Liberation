@@ -1,4 +1,5 @@
 import os
+from operator import itemgetter
 
 
 def display_board(board):
@@ -32,3 +33,25 @@ def display_player(player):
             break
         print(f"{style.MAGENTA}{key}: {str(value)}",
               sep=' ', end=' ', flush=True)
+
+
+def hell_of_fame():
+
+    try:
+        with open("hell_of_fame.csv", "r") as file:
+            lines = file.readlines()
+        file = [element.replace("\n", "").split(";") for element in lines]
+        for s in file:
+            print(*s)
+    except IOError:
+        return []
+
+    y = sorted(file, key=lambda x: int(x[1]), reverse=True)
+
+    with open("hell_of_fame.csv", "w") as file:
+        for record in y:
+            row = ";".join(record)
+            file.write(row + "\n")
+
+
+hell_of_fame()
