@@ -1,7 +1,7 @@
-
+import story
+import sys
 import os
 from operator import itemgetter
-
 
 def display_board(board):
     for item in board:
@@ -37,9 +37,26 @@ def display_player(player):
         print(f"{style.MAGENTA}{key}: {str(value)}{style.RESET}",
               sep=' ', end=' ', flush=True)
 
+        
+def health_level(player, enemy,current_player):
+    if current_player != player:
+        if player["health"] <= 0:
+            print(story.game_over)
+            sys.exit()
+        print(f"You have {player['health']} health left")
+    elif enemy['health'] > 0:
+        print(f"Enemy has {enemy['health']} health left")
+    else:
+        print(f"{enemy['name']} has been defeated")
+            
+def show_dmg(player, player2, dmg, block):
+    if dmg - block <= 0:
+        print(f"{player['name']} have missed")
+    else:
+        print(f"{player['name']} dealt {dmg - block} dmg to {player2['name']}")
 
+        
 def hall_of_fame():
-
     player_score = ['Anna', '99']
     # open file
     try:

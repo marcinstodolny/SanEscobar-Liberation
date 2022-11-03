@@ -102,6 +102,35 @@ I hope they didn't forget to place it there...
 Anyway, let me level up you so you could kill the final boss.
 """
 
+
+story_pic02 = r"""
+         .            )        )
+                  (  (|              .
+              )   )\/ ( ( (
+      *  (   ((  /     ))\))  (  )    )
+    (     \   )\(          |  ))( )  (|
+    >)     ))/   |          )/  \((  ) \
+    (     (      .        -.     V )/   )(    (
+     \   /     .   \            .       \))   ))
+       )(      (  | |   )            .    (  /
+      )(    ,'))     \ /          \( `.    )
+      (\>  ,'/__      ))            __`.  /
+     ( \   | /  ___   ( \/     ___   \ | ( (
+      \.)  |/  /   \__      __/   \   \|  ))
+     .  \. |>  \      | __ |      /   <|  /
+          )/    \____/ :..: \____/     \ <
+   )   \ (|__  .      / ;: \          __| )  (
+  ((    )\)  ~--_     --  --      _--~    /  ))
+   \    (    |  ||               ||  |   (  /
+         \.  |  ||_             _||  |  /
+           > :  |  ~V+-I_I_I-+V~  |  : (.
+          (  \:  T\   _     _   /T  : ./
+           \  :    T^T T-+-T T^T    ;<
+            \..`_       -+-       _'  )
+  )            . `--=.._____..=--'. ./ 
+"""
+
+
 def story_txt02(player):
     return f"""Turn back or I will end you, {player}!
 San Escobar never meant to be a real country!
@@ -166,15 +195,6 @@ credits = r"""
                         |___/                                                                             
 """
 
-small_boss = r"""
- /\   /\ 
- |0   0| 
-(_  ^  _)
- |V\"""V| 
- |V\"""V| 
- \_____/ 
-"""
-
 BOSS_art = r"""
          .            )        )
                   (  (|              .
@@ -202,7 +222,7 @@ BOSS_art = r"""
   )            . `--=.._____..=--'. ./ 
 """
 
-enemy1 = r"""
+Demon = r"""
                    (    )
                   ((((()))
                   |o\ /o)|
@@ -228,7 +248,7 @@ enemy1 = r"""
                         /,/,"
 """
 
-enemy2 = r"""
+Dinosaur = r"""
    ___                                      .-~. /_"-._
   `-._~-.                                  / /_ "~o\  :Y
       \  \                                / : \~x.  ` ')
@@ -296,7 +316,7 @@ enemy4 = r"""
 ###        #######  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  #######       ###
 """
 
-enemy5 = r"""
+Dragon = r"""
        ^                       ^
          |\   \        /        /|
         /  \  |\__  __/|       /  \
@@ -323,7 +343,7 @@ enemy5 = r"""
     VVV  V        VVV  V
 """
 
-enemy6 = r"""
+Alien = r"""
         __.,,------.._
      ,'"   _      _   "`.
     /.__, ._  -=- _"`    Y
@@ -345,6 +365,8 @@ l` \` `.`."`-..,-' j  /./ /, , / , / /l \   \=\l   || `' || ||...
                                  ,'",__,-'       /,, ,-'
                                  Vvv'            VVv'
 """
+def enemies_list():
+  return {"Alien":Alien, "Demon":Demon, "Dinosaur":Dinosaur, "Dragon":Dragon}
 
 def intro(player):
     print(intro_pic01)
@@ -369,7 +391,7 @@ def story_wizard(player):
     sleep(2)
 
 def story_final_boss(player):
-    print(BOSS_art)
+    print(story_pic02)
     for character in story_txt02(player):
         write(character)
     sleep(2)
