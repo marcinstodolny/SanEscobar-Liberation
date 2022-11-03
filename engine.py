@@ -160,7 +160,7 @@ def fight_with_enemy(player, boss=False):
 def fight_core(enemy,enemies_picture,fight,player, current_round):
     while enemy["health"] > 0:
         print(enemies_picture[enemy["name"]])
-        print(f"You have {player['health']} hp                    {enemy['name']} have {enemy['health']} hp")
+        print(f"You have {player['health']} hp                    {enemy['name']} has {enemy['health']} hp")
         current_player = fight[current_round % 2]
         current_enemy = fight[(current_round+1) % 2]
         damage = random_damage(current_player)
