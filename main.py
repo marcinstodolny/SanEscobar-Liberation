@@ -12,6 +12,7 @@ PLAYER_START_Y = 3
 BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
 BOARD_BORDER = "#"
+KING = "\u2655"
 
 
 def create_own_class(character):
@@ -19,7 +20,7 @@ def create_own_class(character):
         character[list(character)[i]] = input(f"Enter player's {list(character)[i]}: ")
     return character
 
-
+  
 def choose_precreated_class(character):
     util.clear_screen()
     ui.display_classes(character)
@@ -28,6 +29,7 @@ def choose_precreated_class(character):
     )
     util.clear_screen()
     return character[int(user_choice) - 1]
+
 
 def create_player():
     human, dwarf, elf = classes.possible_classes(
@@ -44,31 +46,28 @@ def create_player():
         return choose_precreated_class([human, dwarf, elf])
 
 
-def health_level(character, character_list):
-    if character["health"] <= 0:
-        print("you have died!")
-    if character["health"] > 0:
-        print(f"You have {character['health']} health left")
-    for counter, item in enumerate(character_list):
-        print(f"{counter}-{item.get('name')}")
-    user_choice = input("Choose player by entering the number: ")
-    print(character_list[int(user_choice)]["name"])
-    return character_list[int(user_choice)]
-
-
-def create_board(player):
+def create_board(player,i):
     board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT, BOARD_BORDER)
-    engine.put_items_on_board(board, player, BOARD_BORDER)
-    board[BOARD_HEIGHT - 2][BOARD_WIDTH - 1] = "]"
+    if i < 3:
+        engine.put_items_on_board(board, player, BOARD_BORDER, 5, 10)
+        engine.place_enemies_on_board(board, player, BOARD_BORDER, 3, 6)
+        board[BOARD_HEIGHT - 2][BOARD_WIDTH - 1] = "\u2591"
+        # board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = "\u2655"
+    
+
     return board
 
 
 def main():
     player = create_player()
-    board = create_board(player)
+
+    boards = [create_board(player, i) for i in range(4)]
+    board = boards[0]
     collected_items = {}
-    story.intro(player['name'])
+    # story.intro(player['name'])
+
     # util.clear_screen()
+    boss_x,boss_y = 8,8
     is_running = True
     while is_running:
         engine.put_player_on_board(board, player)
@@ -83,7 +82,9 @@ def main():
         elif key == "p":
             pass
         else:
-            engine.player_movement(board, player, key, collected_items, BOARD_BORDER)
+            board, boards = engine.player_movement(board, player, key, collected_items, BOARD_BORDER, KING, boards)
+            if len(boards) == 1:
+                boss_x,boss_y = engine.boss_movement(board, boss_x, boss_y)
         # util.clear_screen()
 
 
