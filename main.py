@@ -13,6 +13,7 @@ BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
 BOARD_BORDER = "#"
 KING = "\u2655"
+WIZARD = colorama.Fore.YELLOW +"\u26E4" + colorama.Fore.RESET
 
 
 def create_own_class(character):
@@ -95,6 +96,8 @@ def game(player,collected_items, boards, board, current_board, boss_x,boss_y):
             input("click enter to continue ")
         else:
             board, current_board = engine.player_movement(board, player, key, collected_items, BOARD_BORDER, KING, boards, current_board)
+            if current_board == 2:
+                board[1][28] = WIZARD
             if current_board == 3:
                 boss_x,boss_y = engine.boss_movement(board, boss_x, boss_y)
         util.clear_screen()

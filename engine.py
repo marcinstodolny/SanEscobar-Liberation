@@ -11,6 +11,7 @@ DMG_ITEMS = {"Dagger": 2, "Wand": 3, "Pick": 1}
 ARMOR_ITEMS = {"Shield": 1}
 HEALTH_ITEMS = {"Potion": 50}
 ENEMIES = [colorama.Fore.RED +"\u2620" + colorama.Fore.RESET]
+WIZARD = [colorama.Fore.YELLOW +"\u26E4" + colorama.Fore.RESET]
 
 
 
@@ -132,6 +133,9 @@ def item_enemy_check(board, player, collected_items):
         equipment_to_stats(item, player)
     elif location in ENEMIES:
         fight_with_enemy(player)
+    elif location in WIZARD:
+        story.story_wizard(player["name"])
+        player['health'] += 100
 
 
 

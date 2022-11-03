@@ -98,8 +98,8 @@ story_pic1 = r"""
 
 def story_txt01(player):
     return f"""{player}! You have finally found me!
-I'll show you the way! You need to go right and down.
-There should be a gate there...
+I'll show you the way! You need to go all the way down and then right.
+There should be a gate there with a king...
 I hope they didn't forget to place it there...
 Anyway, let me level up you so you could kill the final boss.
 """
@@ -457,6 +457,7 @@ def story_wizard(player):
     for character in story_txt01(player):
         write(character)
     sleep(2)
+
 
 
 def story_final_boss(player):
