@@ -70,18 +70,21 @@ def main():
     player = create_player()
     board = create_board(player)
     collected_items = {}
-    story.intro(player['name'])
+    # story.intro(player['name'])
     # util.clear_screen()
     is_running = True
     while is_running:
         engine.put_player_on_board(board, player)
         ui.display_board(board)
+        ui.display_player(player)
         key = util.key_pressed()
         if key == "q":
             is_running = False
         elif key == "i":
             ui.display_items(collected_items)
             input()
+        elif key == "p":
+            pass
         else:
             engine.player_movement(board, player, key, collected_items, BOARD_BORDER)
         # util.clear_screen()
