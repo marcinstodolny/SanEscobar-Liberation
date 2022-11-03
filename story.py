@@ -1,7 +1,6 @@
 from main import *
 from util import *
 
-player 
 
 intro_pic01 = r"""
     .                  .-.    .  _   *     _   .
@@ -49,13 +48,7 @@ intro_pic02 = r"""
                     _ ;; _
                    "-' ` -"
 """
-intro_txt02 = f"""A young hero was approached by a stork:
-Stork: Greetings {player["name"]}! I came from Poland with a mission!
-{player["name"]}: What mission?
-Stork: You must establish San Escobar in the real world! Transform fantasy into a reality!
-{player["name"]}: ...but how? Only Poland recognizes our existence!
-You need to find a wizard! He will level up you and show you the way!
-"""
+
 
 story_pic1 = r"""
                        ,---.
@@ -212,7 +205,14 @@ x,y = 1,1
 # board[x+4][y+6] = "_"
 # board[x+4][y+7] = "/"
 
-def intro():
+def intro(player):
+  intro_txt02 = f"""A young hero was approached by a stork:
+Stork: Greetings {player["name"]}! I came from Poland with a mission!
+{player["name"]}: What mission?
+Stork: You must establish San Escobar in the real world! Transform fantasy into a reality!
+{player["name"]}: ...but how? Only Poland recognizes our existence!
+You need to find a wizard! He will level up you and show you the way!
+"""
   print(intro_pic01)
   for character in intro_txt01:
       sys.stdout.write(character)
