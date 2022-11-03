@@ -58,7 +58,7 @@ def intro_txt02(player):
     return f"""A young hero was approached by a stork:
 Stork: Greetings {player}! I came from Poland with a mission!
 {player}: What mission?
-Stork: You must establish San Escobar in the real world! Transform fantasy into a reality!
+Stork: You must establish San Escobar in the real world! Transform fantasy into reality!
 {player}: ...but how? Only Poland recognizes our existence!
 You need to find a wizard! He will level you up and show you the way!
 """
