@@ -41,5 +41,5 @@ def input_validator(prompt, possible_options, character=False):
         clear_screen()
         if character:
             ui.display_classes(character)
-        user_input = input(f"Try again\n{prompt}")
+        user_input = input(f"{prompt}\nTry again ")
     return int(user_input)

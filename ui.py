@@ -16,6 +16,7 @@ def display_items(items_list):
 
 
 def display_classes(players):
+    print(story.start_screen())
     for counter, classes in enumerate(players, start=1):
         print(f"{counter} - {classes['name']}")
 

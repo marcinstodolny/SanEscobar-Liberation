@@ -18,6 +18,8 @@ WIZARD = colorama.Fore.YELLOW + "\u26E4" + colorama.Fore.RESET
 
 def create_own_class(character):
     for i in range(3):
+        util.clear_screen()
+        print(story.start_screen())
         character[list(character)[i]] = input(f"Enter player's {list(character)[i]}: ")
     return character
 
@@ -38,7 +40,7 @@ def create_player():
     )
     util.clear_screen()
     user_choice = util.input_validator(
-        "Do you want to create your own character [1] or choose default [2]: ",
+        f"{story.start_screen()}\nCreate your own character [1]\nChoose default [2]: ",
         ["1", "2"],
     )
     if int(user_choice) == 1:
@@ -71,7 +73,7 @@ def main():
     current_board = 0
     all_stats = {"items": 0}
     util.clear_screen()
-    # story.intro(player['name'])
+    story.intro(player['name'])
     util.clear_screen()
     boss_x, boss_y = 8, 8
     game(
