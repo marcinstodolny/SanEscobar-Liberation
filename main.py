@@ -55,7 +55,7 @@ def create_board(player, i):
         board[BOARD_HEIGHT - 2][BOARD_WIDTH - 1] = "\u2591"
         if i > 0:
             board[1][0] = "\u2588"
-        board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = "\u2655"
+        # board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = "\u2655"
         if i == 1:
             board[18][1] = WIZARD
     return board
@@ -69,7 +69,7 @@ def main():
     board = boards[0]
     collected_items = {}
     current_board = 0
-    all_stats = {"test":3, "witam": 2}
+    all_stats = {"items":999}
     # story.intro(player['name'])
     util.clear_screen()
     boss_x, boss_y = 8, 8
@@ -99,8 +99,8 @@ def game(player, collected_items, boards, board, current_board, boss_x, boss_y, 
     #         )
     #         if current_board == 3:
     #             boss_x, boss_y = engine.boss_movement(board, boss_x, boss_y)
-        # util.clear_screen()
-    ui.hall_of_fame(all_stats)
+    #     util.clear_screen()
+    ui.hall_of_fame({player['name']:all_stats['items']})
 
 def key_options(key, collected_items, player, is_running, all_stats):
     if key == "q":

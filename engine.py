@@ -131,7 +131,7 @@ def player_movement(
         elif keys[key][0] == "y":
             y = keys[key][1]
     move(key, board, player, collected_items, king_icon, border, x, y)
-    check_for_collision(board, player, collected_items, boards, current_board, all_stats)
+    board, current_board = check_for_collision(board, player, collected_items, boards, current_board, all_stats)
     return board, current_board
 
 
@@ -141,6 +141,7 @@ def check_for_collision(board, player, collected_items, boards, current_board, a
         board, current_board = change_board(player, boards, current_board)
     if current_board == 3:
         boss_battle_check(board, player, collected_items,all_stats)
+    return board, current_board
 
 
 def move(key, board, player, collected_items, king_icon, border, x=0, y=0):

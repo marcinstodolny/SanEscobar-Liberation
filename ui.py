@@ -45,8 +45,10 @@ def display_player(player):
     print("                   Press H for help")
 
 
-def show_statistic(player):
+def show_statistic(player, all_stats):
     print(f"Damage: {player['dmg']}\nArmor: {player['armor']}")
+    for k, v in all_stats.items():
+        print(f"{k}: {v}")
 
 
 def help():
@@ -76,28 +78,22 @@ def show_dmg(player, player2, dmg, block):
 
 
 def hall_of_fame(collected_items):
-
-    # import player score after game in this format
-    player_score = ["Anna", "99"]
-    # open file
+    new_result = []
+    for x, y in collected_items.items():
+        new_result.extend((x, str(y)))
     try:
-        with open("hell_of_fame.csv", "r") as file:
+        with open("hall_of_fame.csv", "r") as file:
             lines = file.readlines()
-        file = [element.replace("\n", "").split(";") for element in lines]
+        top_5 = [element.replace("\n", "").split(";") for element in lines]
     except IOError:
         return []
-    for i, s in enumerate(file, 1):
-        print(i, "-", *s)
-
-    # append new result
-    file.append(player_score)
-    # sorting LB
-    top = sorted(file, key=lambda x: int(x[1]), reverse=True)
-
-    # writing to the file top5 results
-    with open("hell_of_fame.csv", "w") as file:
+    top_5.append(new_result)
+    top = sorted(top_5, key=lambda x: int(x[1]), reverse=True)
+    with open("hall_of_fame.csv", "w") as file:
         for i, record in enumerate(top):
             if i == 5:
                 break
             row = ";".join(record)
             file.write(row + "\n")
+    for i, s in enumerate(top[:5], 1):
+        print(i, "-", *s)
