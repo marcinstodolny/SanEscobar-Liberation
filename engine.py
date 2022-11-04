@@ -103,6 +103,7 @@ def place_enemies_on_board(board, player, BOARD_BORDER, min_num, max_num):
 
 def king(king_icon, key, board, player, collected_items):
     if board[player["x"]][player["y"]] == king_icon:
+        util.clear_screen()
         if count_enemies(board) > 0:
             story.king_speach_1()
             if key == "s":
@@ -113,7 +114,6 @@ def king(king_icon, key, board, player, collected_items):
             story.king_speach_2()
             collected_items["Key"] = 1
         input("Press enter to continue ")
-        util.clear_screen()
 
 
 def count_enemies(board):
@@ -183,7 +183,6 @@ def boss_battle_check(board, player, collected_items, all_stats):
     if location not in [" ", "#"]:
         util.clear_screen()
         fight_with_enemy(player, all_stats, enemies.boss(player["name"]))
-        ui.hall_of_fame(collected_items)
         story.outro(player, all_stats)
 
 
