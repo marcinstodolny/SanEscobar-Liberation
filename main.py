@@ -63,44 +63,50 @@ def create_board(player, i):
 
 def main():
     util.clear_screen()
-    # story.title()
+    story.title()
     player = create_player()
     boards = [create_board(player, i) for i in range(4)]
     board = boards[0]
     collected_items = {}
     current_board = 0
-    all_stats = {"items":999}
-    # story.intro(player['name'])
+    all_stats = {"items": 0}
+    story.intro(player['name'])
     util.clear_screen()
     boss_x, boss_y = 8, 8
-    game(player, collected_items, boards, board, current_board, boss_x, boss_y,all_stats)
+    game(
+        player, collected_items, boards, board, current_board, boss_x, boss_y, all_stats
+    )
 
 
-def game(player, collected_items, boards, board, current_board, boss_x, boss_y, all_stats):
+def game(
+    player, collected_items, boards, board, current_board, boss_x, boss_y, all_stats
+):
     is_running = True
-    # while is_running:
-    #     engine.put_player_on_board(board, player)
-    #     ui.display_board(board)
-    #     ui.display_player(player)
-    #     key = util.key_pressed()
-    #     if key in ["q", "o", "p", "h", "i"]:
-    #         is_running = key_options(key, collected_items, player, is_running, all_stats)
-    #     else:
-    #         board, current_board = engine.player_movement(
-    #             board,
-    #             player,
-    #             key,
-    #             collected_items,
-    #             BOARD_BORDER,
-    #             KING,
-    #             boards,
-    #             current_board,
-    #             all_stats
-    #         )
-    #         if current_board == 3:
-    #             boss_x, boss_y = engine.boss_movement(board, boss_x, boss_y)
-    #     util.clear_screen()
-    ui.hall_of_fame({player['name']:all_stats['items']})
+    while is_running:
+        engine.put_player_on_board(board, player)
+        ui.display_board(board)
+        ui.display_player(player)
+        key = util.key_pressed()
+        if key in ["q", "o", "p", "h", "i"]:
+            is_running = key_options(
+                key, collected_items, player, is_running, all_stats
+            )
+        else:
+            board, current_board = engine.player_movement(
+                board,
+                player,
+                key,
+                collected_items,
+                BOARD_BORDER,
+                KING,
+                boards,
+                current_board,
+                all_stats,
+            )
+            if current_board == 3:
+                boss_x, boss_y = engine.boss_movement(board, boss_x, boss_y)
+        util.clear_screen()
+
 
 def key_options(key, collected_items, player, is_running, all_stats):
     if key == "q":
@@ -109,7 +115,7 @@ def key_options(key, collected_items, player, is_running, all_stats):
         ui.display_items(collected_items)
         input("click enter to continue ")
     elif key == "o":
-        ui.icon_meaning(engine.ITEMS_MEANING)
+        ui.icon_meaning(engine.ITEMS_MEANING, engine.ENEMIES)
         input("click enter to continue ")
     elif key == "p":
         ui.show_statistic(player, all_stats)
@@ -117,7 +123,7 @@ def key_options(key, collected_items, player, is_running, all_stats):
     elif key == "h":
         ui.help()
         code = input("click enter to continue ")
-        if code == "secret":
+        if code == "escobar":
             player["health"] = 1000
             player["dmg"] = 100
     return is_running

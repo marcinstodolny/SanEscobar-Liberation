@@ -57,10 +57,10 @@ def help():
     )
 
 
-def icon_meaning(icons):
+def icon_meaning(icons, enemy):
     for k, v in icons.items():
         print(f"{k}  {v}")
-
+    print(f"{enemy} Enemy")
 
 def health_level(player, enemy, current_player):
     if current_player != player and player["health"] <= 0:

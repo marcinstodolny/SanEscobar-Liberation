@@ -121,7 +121,15 @@ def count_enemies(board):
 
 
 def player_movement(
-    board, player, key, collected_items, border, king_icon, boards, current_board, all_stats
+    board,
+    player,
+    key,
+    collected_items,
+    border,
+    king_icon,
+    boards,
+    current_board,
+    all_stats,
 ):
     keys = {"s": ["x", 1], "w": ["x", -1], "a": ["y", -1], "d": ["y", 1]}
     x, y = 0, 0
@@ -131,16 +139,20 @@ def player_movement(
         elif keys[key][0] == "y":
             y = keys[key][1]
     move(key, board, player, collected_items, king_icon, border, x, y)
-    board, current_board = check_for_collision(board, player, collected_items, boards, current_board, all_stats)
+    board, current_board = check_for_collision(
+        board, player, collected_items, boards, current_board, all_stats
+    )
     return board, current_board
 
 
-def check_for_collision(board, player, collected_items, boards, current_board, all_stats):
+def check_for_collision(
+    board, player, collected_items, boards, current_board, all_stats
+):
     item_enemy_check(board, player, collected_items, all_stats)
     if board[player["x"]][player["y"]] in ["\u2588", "\u2591"]:
         board, current_board = change_board(player, boards, current_board)
     if current_board == 3:
-        boss_battle_check(board, player, collected_items,all_stats)
+        boss_battle_check(board, player, collected_items, all_stats)
     return board, current_board
 
 
@@ -166,13 +178,13 @@ def change_board(player, boards, current_board):
     return board, current_board
 
 
-def boss_battle_check(board, player, collected_items,all_stats):
+def boss_battle_check(board, player, collected_items, all_stats):
     location = board[player["x"]][player["y"]]
     if location not in [" ", "#"]:
         util.clear_screen()
-        fight_with_enemy(player,all_stats, enemies.boss(player["name"]))
+        fight_with_enemy(player, all_stats, enemies.boss(player["name"]))
         ui.hall_of_fame(collected_items)
-        story.outro(player["name"])
+        story.outro(player, all_stats)
 
 
 def item_enemy_check(board, player, collected_items, all_stats):
@@ -202,7 +214,7 @@ def equipment_to_stats(item, player):
         player["health"] += HEALTH_ITEMS[item]
 
 
-def fight_with_enemy(player,all_stats, boss=False):
+def fight_with_enemy(player, all_stats, boss=False):
     if boss:
         enemy = boss
         fight = [player, boss]
@@ -224,24 +236,30 @@ def battle(enemy, enemies_picture, fight, player, current_round, all_stats):
         current_player = fight[current_round % 2]
         current_enemy = fight[(current_round + 1) % 2]
         damage = random_damage(current_player)
-        if damage - current_enemy["armor"] > 0:
-            current_enemy["health"] -= damage - current_enemy["armor"]
-            ui.show_dmg(current_player, current_enemy, damage, current_enemy["armor"])
-            sleep(0.25)
-            ui.health_level(player, enemy, current_player)
-        else:
-            ui.show_dmg(current_player, current_enemy, damage, current_enemy["armor"])
+        attack(damage, current_enemy, current_player, enemy, player)
         sleep(1)
         current_round += 1
         util.clear_screen()
     statistics("Won battles", all_stats)
 
 
+def attack(damage, current_enemy, current_player, enemy, player):
+    if damage - current_enemy["armor"] > 0:
+        current_enemy["health"] -= damage - current_enemy["armor"]
+        ui.show_dmg(current_player, current_enemy, damage, current_enemy["armor"])
+        sleep(0.25)
+        ui.health_level(player, enemy, current_player)
+    else:
+        ui.show_dmg(current_player, current_enemy, damage, current_enemy["armor"])
+    return current_enemy
+
+
 def random_damage(player):
     return random.randint(int(player["dmg"] * 0.5), int(player["dmg"] * 1.5))
 
+
 def statistics(stat, all_stats):
-    
+
     if stat in all_stats:
         all_stats[stat] += 1
     else:

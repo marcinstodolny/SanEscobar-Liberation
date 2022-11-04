@@ -1,6 +1,7 @@
 import sys
 from time import sleep
 import util
+import ui
 
 intro_pic01 = r"""
     .                  .-.    .  _   *     _   .
@@ -472,14 +473,17 @@ def story_final_boss(player):
     sleep(2)
 
 
-def outro(player):
+def outro(player, all_stats):
     print(outro_pic)
-    for character in outro_text(player):
+    for character in outro_text(player["name"]):
         write(character)
     sleep(5)
     print(congrats)
     sleep(3)
     print(credits)
+    sleep(3)
+    print("Top 5 players: ")
+    ui.hall_of_fame({player["name"]: all_stats["items"]})
     sys.exit()
 
 
