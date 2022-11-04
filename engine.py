@@ -112,7 +112,8 @@ def king(king_icon, key, board, player, collected_items):
         else:
             story.king_speach_2()
             collected_items["Key"] = 1
-        input()
+        input("Press enter to continue ")
+        util.clear_screen()
 
 
 def count_enemies(board):
@@ -120,7 +121,7 @@ def count_enemies(board):
 
 
 def player_movement(
-    board, player, key, collected_items, border, king_icon, boards, current_board
+    board, player, key, collected_items, border, king_icon, boards, current_board, all_stats
 ):
     keys = {"s": ["x", 1], "w": ["x", -1], "a": ["y", -1], "d": ["y", 1]}
     x, y = 0, 0
@@ -130,16 +131,16 @@ def player_movement(
         elif keys[key][0] == "y":
             y = keys[key][1]
     move(key, board, player, collected_items, king_icon, border, x, y)
-    check_for_collision(board, player, collected_items, boards, current_board)
+    check_for_collision(board, player, collected_items, boards, current_board, all_stats)
     return board, current_board
 
 
-def check_for_collision(board, player, collected_items, boards, current_board):
-    item_enemy_check(board, player, collected_items)
+def check_for_collision(board, player, collected_items, boards, current_board, all_stats):
+    item_enemy_check(board, player, collected_items, all_stats)
     if board[player["x"]][player["y"]] in ["\u2588", "\u2591"]:
         board, current_board = change_board(player, boards, current_board)
     if current_board == 3:
-        boss_battle_check(board, player, collected_items)
+        boss_battle_check(board, player, collected_items,all_stats)
 
 
 def move(key, board, player, collected_items, king_icon, border, x=0, y=0):
@@ -164,16 +165,16 @@ def change_board(player, boards, current_board):
     return board, current_board
 
 
-def boss_battle_check(board, player, collected_items):
+def boss_battle_check(board, player, collected_items,all_stats):
     location = board[player["x"]][player["y"]]
     if location not in [" ", "#"]:
         util.clear_screen()
-        fight_with_enemy(player, enemies.boss(player["name"]))
+        fight_with_enemy(player,all_stats, enemies.boss(player["name"]))
         ui.hall_of_fame(collected_items)
         story.outro(player["name"])
 
 
-def item_enemy_check(board, player, collected_items):
+def item_enemy_check(board, player, collected_items, all_stats):
     location = board[player["x"]][player["y"]]
     if location in list(ITEMS_MEANING.keys()):
         item = ITEMS_MEANING[location]
@@ -182,9 +183,10 @@ def item_enemy_check(board, player, collected_items):
                 collected_items[item] += 1
             else:
                 collected_items[item] = 1
+            statistics("items", all_stats)
         equipment_to_stats(item, player)
     elif location in ENEMIES:
-        fight_with_enemy(player)
+        fight_with_enemy(player, all_stats)
     elif location in WIZARD:
         story.story_wizard(player["name"])
         player["health"] += 100
@@ -199,7 +201,7 @@ def equipment_to_stats(item, player):
         player["health"] += HEALTH_ITEMS[item]
 
 
-def fight_with_enemy(player, boss=False):
+def fight_with_enemy(player,all_stats, boss=False):
     if boss:
         enemy = boss
         fight = [player, boss]
@@ -209,10 +211,10 @@ def fight_with_enemy(player, boss=False):
     current_round = 0
     util.clear_screen()
     enemies_picture = story.enemies_list()
-    fight(enemy, enemies_picture, fight, player, current_round)
+    battle(enemy, enemies_picture, fight, player, current_round, all_stats)
 
 
-def fight(enemy, enemies_picture, fight, player, current_round):
+def battle(enemy, enemies_picture, fight, player, current_round, all_stats):
     while enemy["health"] > 0:
         print(enemies_picture[enemy["name"]])
         print(
@@ -231,10 +233,18 @@ def fight(enemy, enemies_picture, fight, player, current_round):
         sleep(1)
         current_round += 1
         util.clear_screen()
+    statistics("Won battles", all_stats)
 
 
 def random_damage(player):
     return random.randint(int(player["dmg"] * 0.5), int(player["dmg"] * 1.5))
+
+def statistics(stat, all_stats):
+    
+    if stat in all_stats:
+        all_stats[stat] += 1
+    else:
+        all_stats[stat] = 1
 
 
 def boss_coordinates(boss_x, boss_y):
