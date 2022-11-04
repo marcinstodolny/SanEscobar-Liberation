@@ -201,6 +201,7 @@ def item_enemy_check(board, player, collected_items, all_stats):
     elif location in ENEMIES:
         fight_with_enemy(player, all_stats)
     elif location in WIZARD:
+        util.clear_screen()
         story.story_wizard(player["name"])
         player["health"] += 100
 

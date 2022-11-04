@@ -12,7 +12,7 @@ PLAYER_START_X = 1
 PLAYER_START_Y = BOARD_WIDTH - 2
 
 BOARD_BORDER = "#"
-KING = "\u2655"
+KING = colorama.Fore.YELLOW + "\u2655" + colorama.Fore.RESET
 WIZARD = colorama.Fore.YELLOW + "\u26E4" + colorama.Fore.RESET
 
 
@@ -55,7 +55,7 @@ def create_board(player, i):
         board[BOARD_HEIGHT - 2][BOARD_WIDTH - 1] = "\u2591"
         if i > 0:
             board[1][0] = "\u2588"
-        # board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = "\u2655"
+        board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = KING
         if i == 1:
             board[18][1] = WIZARD
     return board
@@ -70,7 +70,8 @@ def main():
     collected_items = {}
     current_board = 0
     all_stats = {"items": 0}
-    story.intro(player['name'])
+    util.clear_screen()
+    # story.intro(player['name'])
     util.clear_screen()
     boss_x, boss_y = 8, 8
     game(

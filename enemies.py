@@ -5,31 +5,44 @@ def possible_classes():
     demon = {
         "name": "Demon",
         "health": 50,
-        "dmg": 8,
+        "dmg": 12,
         "armor": 3,
     }
 
     dinosaur = {
         "name": "Dinosaur",
         "health": 75,
-        "dmg": 9,
+        "dmg": 13,
         "armor": 3,
     }
 
     dragon = {
         "name": "Dragon",
-        "health": 20,
-        "dmg": 15,
+        "health": 30,
+        "dmg": 20,
         "armor": 2,
     }
 
     alien = {
         "name": "Alien",
-        "health": 125,
-        "dmg": 8,
-        "armor": 3,
+        "health": 100,
+        "dmg": 12,
+        "armor": 1,
     }
-    return [demon, dinosaur, dragon, alien]
+    Lucifer = {
+        "name": "Lucifer",
+        "health": 50,
+        "dmg": 15,
+        "armor": 1,
+    }
+    Wyvern = {
+        "name": "Wyvern",
+        "health": 75,
+        "dmg": 5,
+        "armor": 5,
+    }
+
+    return [demon, dinosaur, dragon, alien, Lucifer, Wyvern]
 
 
 def boss(player):

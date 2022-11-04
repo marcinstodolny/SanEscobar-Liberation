@@ -60,7 +60,7 @@ def help():
 def icon_meaning(icons, enemy):
     for k, v in icons.items():
         print(f"{k}  {v}")
-    print(f"{enemy} Enemy")
+    print(f"{enemy[0]}   Enemy")
 
 def health_level(player, enemy, current_player):
     if current_player != player and player["health"] <= 0:
@@ -72,7 +72,7 @@ def health_level(player, enemy, current_player):
 
 def show_dmg(player, player2, dmg, block):
     if dmg - block <= 0:
-        print(f"{player['name']} have missed")
+        print(f"{player['name']} missed")
     else:
         print(f"{player['name']} dealt {dmg - block} dmg to {player2['name']}")
 
