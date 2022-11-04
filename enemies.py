@@ -1,4 +1,6 @@
 import story
+
+
 def possible_classes():
     demon = {
         "name": "Demon",
@@ -20,8 +22,7 @@ def possible_classes():
         "dmg": 15,
         "armor": 2,
     }
-    
-    
+
     alien = {
         "name": "Alien",
         "health": 125,
@@ -30,11 +31,12 @@ def possible_classes():
     }
     return [demon, dinosaur, dragon, alien]
 
+
 def boss(player):
     story.story_final_boss(player)
     return {
         "name": "Boss",
-        "health": 10,
+        "health": 200,
         "dmg": 10,
         "armor": 0,
     }

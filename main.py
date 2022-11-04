@@ -9,11 +9,11 @@ PLAYER_ICON = f"{colorama.Fore.CYAN}@{colorama.Fore.RESET}"
 BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
 PLAYER_START_X = 1
-PLAYER_START_Y = BOARD_WIDTH-2
+PLAYER_START_Y = BOARD_WIDTH - 2
 
 BOARD_BORDER = "#"
 KING = "\u2655"
-WIZARD = colorama.Fore.YELLOW +"\u26E4" + colorama.Fore.RESET
+WIZARD = colorama.Fore.YELLOW + "\u26E4" + colorama.Fore.RESET
 
 
 def create_own_class(character):
@@ -21,7 +21,7 @@ def create_own_class(character):
         character[list(character)[i]] = input(f"Enter player's {list(character)[i]}: ")
     return character
 
-  
+
 def choose_precreated_class(character):
     util.clear_screen()
     ui.display_classes(character)
@@ -47,15 +47,17 @@ def create_player():
         return choose_precreated_class([human, dwarf, elf])
 
 
-def create_board(player,i):
+def create_board(player, i):
     board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT, BOARD_BORDER, i)
     if i < 3:
-        engine.put_items_on_board(board, player, BOARD_BORDER, 5, 10)
-        engine.place_enemies_on_board(board, player, BOARD_BORDER, 3, 6)
+        engine.put_items_on_board(board, player, BOARD_BORDER, 10, 13)
+        engine.place_enemies_on_board(board, player, BOARD_BORDER, 5, 6)
         board[BOARD_HEIGHT - 2][BOARD_WIDTH - 1] = "\u2591"
         if i > 0:
-            board[1][0] =  "\u2588"
+            board[1][0] = "\u2588"
         board[BOARD_HEIGHT - 2][BOARD_WIDTH - 2] = "\u2655"
+        if i == 1:
+            board[18][1] = WIZARD
     return board
 
 
@@ -68,39 +70,56 @@ def main():
     collected_items = {}
     current_board = 0
     # story.intro(player['name'])
-    # util.clear_screen()
-    boss_x,boss_y = 8,8
-    game(player,collected_items, boards, board, current_board, boss_x,boss_y)
+    util.clear_screen()
+    boss_x, boss_y = 8, 8
+    game(player, collected_items, boards, board, current_board, boss_x, boss_y)
 
 
-def game(player,collected_items, boards, board, current_board, boss_x,boss_y):
+def game(player, collected_items, boards, board, current_board, boss_x, boss_y):
     is_running = True
     while is_running:
         engine.put_player_on_board(board, player)
         ui.display_board(board)
         ui.display_player(player)
         key = util.key_pressed()
-        if key == "q":
-            is_running = False
-        elif key == "i":
-            ui.display_items(collected_items)
-            input("click enter to continue ")
-        elif key == "o":
-            ui.icon_meaning(engine.ITEMS_MEANING)
-            input("click enter to continue ")
-        elif key == "p":
-            ui.show_statistic(player)
-            input("click enter to continue ")
-        elif key == "h":
-            ui.help()
-            input("click enter to continue ")
+        if key in ["q", "o", "p", "h", "i"]:
+            is_running = key_options(key, collected_items, player, is_running)
         else:
-            board, current_board = engine.player_movement(board, player, key, collected_items, BOARD_BORDER, KING, boards, current_board)
-            if current_board == 2:
-                board[1][28] = WIZARD
+            board, current_board = engine.player_movement(
+                board,
+                player,
+                key,
+                collected_items,
+                BOARD_BORDER,
+                KING,
+                boards,
+                current_board,
+            )
             if current_board == 3:
-                boss_x,boss_y = engine.boss_movement(board, boss_x, boss_y)
-        util.clear_screen()
+                boss_x, boss_y = engine.boss_movement(board, boss_x, boss_y)
+        # util.clear_screen()
+
+
+def key_options(key, collected_items, player, is_running):
+    if key == "q":
+        is_running = False
+    elif key == "i":
+        ui.display_items(collected_items)
+        input("click enter to continue ")
+    elif key == "o":
+        ui.icon_meaning(engine.ITEMS_MEANING)
+        input("click enter to continue ")
+    elif key == "p":
+        ui.show_statistic(player)
+        input("click enter to continue ")
+    elif key == "h":
+        ui.help()
+        code = input("click enter to continue ")
+        if code == "secret":
+            player["health"] = 1000
+            player["dmg"] = 100
+    return is_running
+
 
 if __name__ == "__main__":
     main()

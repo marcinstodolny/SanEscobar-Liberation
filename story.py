@@ -112,15 +112,18 @@ San Escobar never meant to be a real country!
 Evil boss: RRrrraraaaargh! Take that!
 """
 
+
 def king_text1():
     return """There are still some monsters left on this land!
 We cannot enter reality with them! Please! Purge them all!
 """
 
+
 def king_text2():
     return """Thank you for making this land safe!
 Take this key to new area.
 """
+
 
 outro_pic = r"""
   ........::::::::::::..           .......|...............::::::::........
@@ -372,7 +375,6 @@ __  ______  __  __   _       ______  _   ____
 """
 
 
-
 king_art = r"""
                     .
                    / \
@@ -396,7 +398,6 @@ _..--'.-(    |   `-'''-'   |    )-.`--.._
         ,' `/               \'`.
              `------.------'          
 """
-
 
 
 def title():
@@ -464,7 +465,6 @@ def story_wizard(player):
     sleep(2)
 
 
-
 def story_final_boss(player):
     print(BOSS_art)
     for character in story_txt02(player):
@@ -482,10 +482,12 @@ def outro(player):
     print(credits)
     sys.exit()
 
+
 def king_speach_1():
     print(king_art)
     for character in king_text1():
         write(character)
+
 
 def king_speach_2():
     print(king_art)

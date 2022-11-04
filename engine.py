@@ -6,12 +6,18 @@ import util
 from time import sleep
 import colorama
 
-ITEMS_MEANING = {"\U000026CF": "Pick", "\U0000269A": "Wand", "\u26E8": "Shield", "\u2E38": "Dagger", "\u2764":"Potion"}
+ITEMS_MEANING = {
+    "\U000026CF": "Pick",
+    "\U0000269A": "Wand",
+    "\u26E8": "Shield",
+    "\u2E38": "Dagger",
+    "\u2764": "Potion",
+}
 DMG_ITEMS = {"Dagger": 2, "Wand": 3, "Pick": 1}
 ARMOR_ITEMS = {"Shield": 1}
 HEALTH_ITEMS = {"Potion": 50}
-ENEMIES = [colorama.Fore.RED +"\u2620" + colorama.Fore.RESET]
-WIZARD = [colorama.Fore.YELLOW +"\u26E4" + colorama.Fore.RESET]
+ENEMIES = [colorama.Fore.RED + "\u2620" + colorama.Fore.RESET]
+WIZARD = [colorama.Fore.YELLOW + "\u26E4" + colorama.Fore.RESET]
 
 
 def create_board(width, height, BOARD_BORDER, i):
@@ -23,46 +29,51 @@ def create_board(width, height, BOARD_BORDER, i):
         for j in range(height)
     ]
     if i == 0:
-        wall_row(board, height,width)
+        wall_row(board, width)
     elif i == 1:
-        second_map(board, height,width)
+        second_map(board, height, width)
     elif i == 2:
         wall_column(board, height)
     return board
 
-def wall_row(board, width,start=0):
-    
-    for i in range(start,len(board)-3,3):
+
+def wall_row(board, width, start=0):
+
+    for i in range(start, len(board) - 3, 3):
         if i % 2 == 0:
-            for j in range(width-3,):
+            for j in range(
+                width - 3,
+            ):
                 board[i][j] = "#"
         else:
-            for j in range(3,width):
+            for j in range(3, width):
                 board[i][j] = "#"
+
 
 def wall_column(board, height, start=0):
-     for i in range(start,len(board[0])-3,4):
+    for i in range(start, len(board[0]) - 3, 4):
         if i % 8 == 4:
-            for j in range(height-3):
+            for j in range(height - 3):
                 board[j][i] = "#"
         else:
-            for j in range(3,height):
+            for j in range(3, height):
                 board[j][i] = "#"
 
-def second_map(board, height,width):
-    wall_row(board, int(width/2-2), 4)
-    wall_column(board, int(height), int(height-8))
-    
+
+def second_map(board, height, width):
+    wall_row(board, int(width / 2 - 2), 4)
+    wall_column(board, int(height), int(height - 8))
+
+
 def check_border(direction, iterator):
     return iterator in [0] + [direction - k for k in [0, 1]]
 
 
 def put_player_on_board(board, player):
-    print(player["x"], player["y"])
     for sub_list in board:
         if player["icon"] in sub_list:
             board[board.index(sub_list)][sub_list.index(player["icon"])] = " "
-    board[player["x"]][player["y"]] =  player["icon"] 
+    board[player["x"]][player["y"]] = player["icon"]
 
 
 def put_items_on_board(board, player, BOARD_BORDER, min_num, max_num):
@@ -81,64 +92,78 @@ def place_enemies_on_board(board, player, BOARD_BORDER, min_num, max_num):
     enemies_number = random.randint(min_num, max_num)
     for _ in range(enemies_number):
         x, y = random.randint(1, len(board) - 1), random.randint(1, len(board[0]) - 1)
-        if board[x][y] not in [player["icon"], BOARD_BORDER] + list(ITEMS_MEANING.keys()) + ENEMIES:
+        if (
+            board[x][y]
+            not in [player["icon"], BOARD_BORDER] + list(ITEMS_MEANING.keys()) + ENEMIES
+        ):
             board[x][y] = random.choice(ENEMIES)
         else:
             enemies_number += 1
 
-def king(king_icon,key, board, player, collected_items):
+
+def king(king_icon, key, board, player, collected_items):
     if board[player["x"]][player["y"]] == king_icon:
         if count_enemies(board) > 0:
             story.king_speach_1()
-            input()
             if key == "s":
-                player["x"] -=1
+                player["x"] -= 1
             elif key == "d":
                 player["y"] -= 1
         else:
             story.king_speach_2()
-            input()
             collected_items["Key"] = 1
+        input()
 
 
 def count_enemies(board):
     return sum(row.count(ENEMIES[0]) for row in board)
 
 
-def player_movement(board, player, key, collected_items, BOARD_BORDER, king_icon,boards, current_board):
-    if key == "s" and board[player["x"] + 1][player["y"]] != BOARD_BORDER:
-        player["x"] += 1
-        king(king_icon,key, board, player, collected_items)
+def player_movement(
+    board, player, key, collected_items, border, king_icon, boards, current_board
+):
+    keys = {"s": ["x", 1], "w": ["x", -1], "a": ["y", -1], "d": ["y", 1]}
+    x, y = 0, 0
+    if key in ["s", "w", "a", "d"]:
+        if keys[key][0] == "x":
+            x = keys[key][1]
+        elif keys[key][0] == "y":
+            y = keys[key][1]
+    move(key, board, player, collected_items, king_icon, border, x, y)
+    check_for_collision(board, player, collected_items, boards, current_board)
+    return board, current_board
 
-    if key == "w" and board[player["x"] - 1][player["y"]] != BOARD_BORDER:
-        player["x"] -= 1
-    if key == "a" and board[player["x"]][player["y"] - 1] != BOARD_BORDER:
-        player["y"] -= 1
-    if key == "d" and board[player["x"]][player["y"] + 1] != BOARD_BORDER:
-        player["y"] += 1
-        king(king_icon,key, board, player, collected_items)
+
+def check_for_collision(board, player, collected_items, boards, current_board):
     item_enemy_check(board, player, collected_items)
-    if board[player["x"]][player["y"]] in ["\u2588", "\u2591"] :
+    if board[player["x"]][player["y"]] in ["\u2588", "\u2591"]:
         board, current_board = change_board(player, boards, current_board)
     if current_board == 3:
         boss_battle_check(board, player, collected_items)
-    return board, current_board
+
+
+def move(key, board, player, collected_items, king_icon, border, x=0, y=0):
+    if board[player["x"] + x][player["y"] + y] != border:
+        player["x"] += x
+        player["y"] += y
+        if key in ["s", "d"]:
+            king(king_icon, key, board, player, collected_items)
 
 
 def change_board(player, boards, current_board):
     doors = boards[current_board][player["x"]][player["y"]]
     if doors == "\u2588":
         current_board -= 1
-        player["x"] = len(boards[current_board]) -2
-        player["y"] = len(boards[current_board][0]) -2
+        player["x"] = len(boards[current_board]) - 2
+        player["y"] = len(boards[current_board][0]) - 2
     elif doors == "\u2591":
         current_board += 1
         player["x"] = 1
         player["y"] = 1
     board = boards[current_board]
     return board, current_board
-    
-    
+
+
 def boss_battle_check(board, player, collected_items):
     location = board[player["x"]][player["y"]]
     if location not in [" ", "#"]:
@@ -162,8 +187,7 @@ def item_enemy_check(board, player, collected_items):
         fight_with_enemy(player)
     elif location in WIZARD:
         story.story_wizard(player["name"])
-        player['health'] += 100
-
+        player["health"] += 100
 
 
 def equipment_to_stats(item, player):
@@ -185,35 +209,37 @@ def fight_with_enemy(player, boss=False):
     current_round = 0
     util.clear_screen()
     enemies_picture = story.enemies_list()
-    fight_core(enemy,enemies_picture,fight,player, current_round)
+    fight(enemy, enemies_picture, fight, player, current_round)
 
 
-def fight_core(enemy,enemies_picture,fight,player, current_round):
+def fight(enemy, enemies_picture, fight, player, current_round):
     while enemy["health"] > 0:
         print(enemies_picture[enemy["name"]])
-        print(f"You have {player['health']} hp                    {enemy['name']} has {enemy['health']} hp")
+        print(
+            f"You have {player['health']} hp                    {enemy['name']} has {enemy['health']} hp"
+        )
         current_player = fight[current_round % 2]
-        current_enemy = fight[(current_round+1) % 2]
+        current_enemy = fight[(current_round + 1) % 2]
         damage = random_damage(current_player)
-        if  damage - current_enemy["armor"] > 0:
+        if damage - current_enemy["armor"] > 0:
             current_enemy["health"] -= damage - current_enemy["armor"]
             ui.show_dmg(current_player, current_enemy, damage, current_enemy["armor"])
             sleep(0.25)
             ui.health_level(player, enemy, current_player)
         else:
             ui.show_dmg(current_player, current_enemy, damage, current_enemy["armor"])
-        sleep(1)  
+        sleep(1)
         current_round += 1
-        util.clear_screen() 
+        util.clear_screen()
 
 
 def random_damage(player):
-    return random.randint(int(player["dmg"]*0.5), int(player["dmg"]*1.5))
+    return random.randint(int(player["dmg"] * 0.5), int(player["dmg"] * 1.5))
 
 
 def boss_coordinates(boss_x, boss_y):
-    boss_x += random.randint(-1,1)
-    boss_y += random.randint(-1,1)
+    boss_x += random.randint(-1, 1)
+    boss_y += random.randint(-1, 1)
     if boss_x > 12:
         boss_x = 11
     elif boss_x < 3:
@@ -222,28 +248,28 @@ def boss_coordinates(boss_x, boss_y):
         boss_y = 19
     elif boss_y < 3:
         boss_y = 4
-    return boss_x,boss_y
+    return boss_x, boss_y
 
 
 def boss_movement(board, boss_x_input, boss_y_input):
-    boss_x,boss_y = boss_x_input, boss_y_input
+    boss_x, boss_y = boss_x_input, boss_y_input
     row = 0
     for i in enumerate(story.small_boss):
         if i[1] == "\n":
             row += 1
             continue
         elif row > 0:
-            board[boss_x + row][boss_y + int(i[0])-10*row] = " "
+            board[boss_x + row][boss_y + int(i[0]) - 10 * row] = " "
         elif row == 0:
             board[boss_x + row][boss_y + int(i[0])] = " "
-    boss_x,boss_y = boss_coordinates(boss_x_input,boss_y_input)
+    boss_x, boss_y = boss_coordinates(boss_x_input, boss_y_input)
     row = 0
     for i in enumerate(story.small_boss):
         if i[1] == "\n":
             row += 1
             continue
         elif row > 0:
-            board[boss_x + row][boss_y + int(i[0])-10*row] = i[1]
+            board[boss_x + row][boss_y + int(i[0]) - 10 * row] = i[1]
         elif row == 0:
             board[boss_x + row][boss_y + int(i[0])] = i[1]
     return boss_x, boss_y

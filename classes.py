@@ -19,9 +19,8 @@ def possible_classes(PLAYER_START_X, PLAYER_START_Y, PLAYER_ICON):
         "y": PLAYER_START_Y,
         "icon": PLAYER_ICON,
         "health": 150,
-        "dmg": 50,
+        "dmg": 13,
         "armor": 7,
-
     }
 
     elf = {
