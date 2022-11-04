@@ -98,7 +98,7 @@ story_pic1 = r"""
 
 def story_txt01(player):
     return f"""{player}! You have finally found me!
-I'll show you the way! You need to go all the way down and then right.
+I'll show you the way! You need to go to the right-down corner of the map.
 There should be a gate there with a king...
 I hope they didn't forget to place it there...
 Anyway, let me level up you so you could kill the final boss.
