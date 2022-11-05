@@ -73,7 +73,7 @@ def main():
     current_board = 0
     all_stats = {"items": 0}
     util.clear_screen()
-    # story.intro(player['name'])
+    story.intro(player['name'])
     util.clear_screen()
     boss_x, boss_y = 8, 8
     game(
