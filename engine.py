@@ -148,11 +148,12 @@ def player_movement(
 def check_for_collision(
     board, player, collected_items, boards, current_board, all_stats
 ):
-    item_enemy_check(board, player, collected_items, all_stats)
+    check_for_item(board[player["x"]][player["y"]], player, collected_items, all_stats)
+    check_for_entity(board[player["x"]][player["y"]],player,all_stats)
     if board[player["x"]][player["y"]] in ["\u2588", "\u2591"]:
         board, current_board = change_board(player, boards, current_board)
     if current_board == 3:
-        boss_battle_check(board, player, collected_items, all_stats)
+        boss_battle_check(board[player["x"]][player["y"]], player, all_stats)
     return board, current_board
 
 
@@ -178,16 +179,14 @@ def change_board(player, boards, current_board):
     return board, current_board
 
 
-def boss_battle_check(board, player, collected_items, all_stats):
-    location = board[player["x"]][player["y"]]
+def boss_battle_check(location, player, all_stats):
     if location not in [" ", "#"]:
         util.clear_screen()
         fight_with_enemy(player, all_stats, enemies.boss(player["name"]))
         story.outro(player, all_stats)
 
 
-def item_enemy_check(board, player, collected_items, all_stats):
-    location = board[player["x"]][player["y"]]
+def check_for_item(location, player, collected_items, all_stats):
     if location in list(ITEMS_MEANING.keys()):
         item = ITEMS_MEANING[location]
         if item not in HEALTH_ITEMS:
@@ -197,7 +196,10 @@ def item_enemy_check(board, player, collected_items, all_stats):
                 collected_items[item] = 1
             statistics("items", all_stats)
         equipment_to_stats(item, player)
-    elif location in ENEMIES:
+
+
+def check_for_entity(location,player,all_stats):
+    if location in ENEMIES:
         fight_with_enemy(player, all_stats)
     elif location in WIZARD:
         util.clear_screen()
@@ -215,43 +217,38 @@ def equipment_to_stats(item, player):
 
 
 def fight_with_enemy(player, all_stats, boss=False):
-    if boss:
-        enemy = boss
-        fight = [player, boss]
-    else:
-        enemy = random.choice(enemies.possible_classes())
-        fight = [player, enemy]
+    enemy = boss or random.choice(enemies.possible_classes())
     current_round = 0
     util.clear_screen()
     enemies_picture = story.enemies_list()
-    battle(enemy, enemies_picture, fight, player, current_round, all_stats)
+    battle(enemy, enemies_picture, player, current_round, all_stats)
 
 
-def battle(enemy, enemies_picture, fight, player, current_round, all_stats):
+def battle(enemy, enemies_picture, player, current_round, all_stats):
     while enemy["health"] > 0:
         print(enemies_picture[enemy["name"]])
         print(
             f"You have {player['health']} hp                    {enemy['name']} has {enemy['health']} hp"
         )
-        current_player = fight[current_round % 2]
-        current_enemy = fight[(current_round + 1) % 2]
-        damage = random_damage(current_player)
-        attack(damage, current_enemy, current_player, enemy, player)
+        Attacker = [enemy, player][current_round % 2]
+        Victim = [enemy, player][(current_round + 1) % 2]
+        damage = random_damage(Attacker)
+        attack(damage, Victim, Attacker, enemy, player)
         sleep(1)
         current_round += 1
         util.clear_screen()
     statistics("Won battles", all_stats)
 
 
-def attack(damage, current_enemy, current_player, enemy, player):
-    if damage - current_enemy["armor"] > 0:
-        current_enemy["health"] -= damage - current_enemy["armor"]
-        ui.show_dmg(current_player, current_enemy, damage, current_enemy["armor"])
+def attack(damage, Victim, Attacker, enemy, player):
+    if damage - Victim["armor"] > 0:
+        Victim["health"] -= damage - Victim["armor"]
+        ui.show_dmg(Attacker, Victim, damage, Victim["armor"])
         sleep(0.25)
-        ui.health_level(player, enemy, current_player)
+        ui.health_level(player, enemy, Attacker)
     else:
-        ui.show_dmg(current_player, current_enemy, damage, current_enemy["armor"])
-    return current_enemy
+        ui.show_dmg(Attacker, Victim, damage, Victim["armor"])
+    return Victim
 
 
 def random_damage(player):
