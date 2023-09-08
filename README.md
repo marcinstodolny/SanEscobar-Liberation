@@ -28,4 +28,4 @@ Welcome to the San Escobar: Liberation RPG Game, an epic adventure written in Py
 - Tomasz Citko https://github.com/TomaszCitko <br/>
 - Marcin Stodolny https://github.com/marcinstodolny<br/>
 - Maciej Trębacz https://github.com/MaciejTrebacz<br/>
-- Martyna Marcinko https://github.com/martyna-marcinko<br/>
+- Martyna Marcinkowska https://github.com/martyna-marcinko<br/>
