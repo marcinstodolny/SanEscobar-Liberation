@@ -1,4 +1,4 @@
-# Console RPG Game
+# San Escobar: Liberation - Console RPG Game
 
 Welcome to the San Escobar: Liberation RPG Game, an epic adventure written in Python that will take you on a journey filled with engaging combat, character development, an epic story, and a thrilling final boss fight. Will you rise to the challenge and earn a spot in the Hall of Fame?
 
