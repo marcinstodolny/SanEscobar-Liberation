@@ -12,11 +12,15 @@ def key_pressed():
         try:
             # probably Windows
             import msvcrt
+            key = msvcrt.getch()
+            if key == b'\xe0':
+                msvcrt.getch()
+                return None
+            else:
+                return key.decode("utf-8")
         except ImportError:
             # FIXME what to do on other platforms?
             raise ImportError("getch not available")
-        else:
-            return msvcrt.getch().decode("utf-8")
     else:
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
